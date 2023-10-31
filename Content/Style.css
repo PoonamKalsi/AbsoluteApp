@@ -1,0 +1,748 @@
+﻿#Mainright_gridReport td {
+    border: solid 1px darkgray;
+}
+
+.right_structure #btnShow {
+    float: right;
+}
+
+body 
+{
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    background: whitesmoke;
+}
+
+.right_structure .FileUpload-tool {
+    padding: 10px;
+    font-size: 15px;
+}
+
+.right_structure .Heading {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    float: left;
+    color: gray;
+    margin: 0 0 30px 0;
+}
+
+.right_structure .instructions {
+    width: 100%;
+    float: right;
+    margin: 25px 0 25px 0;
+}
+
+.right_structure .lbl-Title {
+    font-size: 25px;
+    /* padding: 36px 0 0 0; */
+}
+
+.right_structure .btn {
+    text-transform: uppercase;
+    font-weight: 700;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 10px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    background: darkcyan;
+    color: white;
+    margin: 0 5px;
+}
+
+.right_structure .btn-cancel {
+    text-transform: uppercase;
+    font-weight: 700;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 10px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    background: IndianRed;
+    color: white;
+    margin: 0 5px;
+}
+
+
+.right_structure .Get-result {
+    float: left;
+    width: 98%;
+    margin: 2% 1% 1% 1%;
+}
+
+    .right_structure .Get-result th {
+        padding: 7px 10px;
+        text-align: center;
+    }
+
+    .right_structure .Get-result td {
+        padding: 5px 5px;
+        text-align: center;
+    }
+
+    .right_structure .Get-result table {
+        width: 100% !important;
+    }
+
+.right_structure .Result-block {
+    position: relative;
+    margin: 18px 0 -13px 70px;
+    letter-spacing: 2px;
+}
+
+.right_structure .btn-download {
+    height: 30px;
+    width: 40px;
+    border: none;
+}
+
+.right_structure .File-Upload {
+    float: left;
+}
+
+.right_structure .download {
+    float: left;
+}
+
+    .right_structure .download #btndownload {
+        touch-action: manipulation;
+        cursor: pointer;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 10px 12px 10px 50px;
+        font-size: 16px;
+        line-height: 1.428571;
+        background: darkcyan;
+        color: white;
+        background-image: url(/images/download.png);
+        background-repeat: no-repeat;
+        background-size: 27px;
+        background-position: 12px;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin: 0 10px;
+    }
+
+.right_structure .error {
+    width: 99%;
+    display: block;
+    float: left;
+    background-color: indianred;
+    margin: 0.5%;
+}
+
+.right_structure .error-text {
+    width: 100%;
+    display: block;
+    float: left;
+    color: white;
+    padding: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.right_structure .notification {
+    width: 99%;
+    display: block;
+    float: left;
+    background-color: darkgreen;
+    margin: 0.5%;
+}
+
+.right_structure .notification-text {
+    width: 100%;
+    display: block;
+    float: left;
+    color: white;
+    padding: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.right_structure .controls .row1 .left {
+    float: left;
+    width: 100%;
+    background: none;
+}
+
+.right_structure .controls .row1 .right {
+    float: left;
+}
+
+.right_structure .delete {
+    float: left;
+}
+
+.right_structure .row1 {
+    width: 100%;
+    float: left;
+    margin: 10px 0;
+}
+
+.right_structure .row2 {
+    width: 100%;
+    float: left;
+    margin: 25px 0 25px 0;
+}
+
+.right_structure span#lblfilter {
+    padding: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.right_structure #ddlStatus {
+    padding: 6px;
+    font-weight: 700;
+    border: solid 1px;
+}
+
+.right_structure .deleteLogs {
+    float: left;
+}
+
+.right_structure .main-containor {
+    width: 100%;
+    float: left;
+}
+
+.right_structure #dialog li {
+    padding: 5px;
+}
+
+.right_structure .rowbetween {
+    width: 100%;
+    float: left;
+    margin-left: 15%;
+    margin-top: 2%;
+}
+
+.right_structure .contols-inner {
+    width: 100%;
+    float: left;
+}
+
+.right_structure .row3 {
+    width: 100%;
+    float: left;
+}
+
+.right_structure .filterleft {
+    float: left;
+}
+
+.filter {
+    float: left;
+}
+
+.controls .filter select {
+    position: relative;
+    padding: 0 10px;
+}
+
+span#Mainright_lblfilter {
+    top: 0;
+    vertical-align: text-top;
+    line-height: 0px;
+}
+
+.loginass {
+    border-radius: 0px 0px 0px 0px;
+    position: relative;
+    display: inline-block;
+    padding: 10%;
+    width: 80%;
+    color: #fff;
+}
+
+.inner {
+    text-align: left;
+}
+
+img#logo {
+    height: auto;
+    width: 80px;
+    padding: 20px 0 0 28px;
+}
+
+.Heading1 {
+    margin-bottom: 50px;
+}
+
+.contols-inner1 {
+    width: 100%;
+    float: left;
+    margin-top: 25px;
+}
+
+.outer-main {
+    width: 100%;
+}
+
+.scroller {
+    overflow: scroll !important;
+    height: 280px;
+}
+
+ul li {
+    list-style: circle
+}
+
+button#addProductSpec {
+    float: left;
+    margin: 10px 0 0 0;
+}
+
+.fg {
+    height: 35px;
+}
+
+
+/*==================REVERT STOCK LOG Changes==============*/
+.dashboard .right {
+    background-color: #f7f7f7 !important;
+}
+
+.RevertStockLog .stockchange td {
+    font-size: 15px !important;
+    color: #353c4e !important;
+}
+
+.RevertStockLog .order-title {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: #3259fe;
+    text-transform: uppercase;
+}
+
+.RevertStockLog .lbl-Title {
+    color: black;
+    font-weight: 100;
+    font-size: 30px;
+}
+
+.RevertStockLog {
+    width: 100%;
+    float: left;
+    font-weight: 100;
+}
+
+    .RevertStockLog .order {
+        width: 100%;
+        float: left;
+        padding: 10px;
+        margin: 10px 0 60px 0;
+        background-color: #fff;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+        box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+    }
+
+    .RevertStockLog .order-row {
+        width: 100%;
+        float: left;
+        margin: 10px 5px;
+    }
+
+    .RevertStockLog .order-left .order-col1 {
+        width: 30%;
+        float: left;
+    }
+
+    .RevertStockLog .stockchange {
+        width: 100%;
+        float: left;
+        margin-top: 12px;
+    }
+
+        .RevertStockLog .stockchange table {
+            width: 100% !important;
+            float: left;
+        }
+
+        .RevertStockLog .stockchange th {
+            text-align: left !important;
+            background-image: -webkit-linear-gradient(90deg,#396afc 0%,#2948ff 100%);
+        }
+
+    .RevertStockLog .calculation {
+        float: left;
+        width: 130px;
+    }
+
+        .RevertStockLog .calculation .cal-row {
+            width: 100%;
+            text-align: left;
+        }
+
+        .RevertStockLog .calculation .label {
+            padding: 0;
+            text-align: left;
+            width: 80px;
+            font-size: 14px;
+        }
+
+        .RevertStockLog .calculation .number {
+            font-size: 14px;
+            color: #4a4a4a;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .RevertStockLog .calculation .label {
+            color: grey;
+        }
+
+        .RevertStockLog .calculation span.layer {
+            display: block;
+            border-top: 1px solid lightgray;
+            width: 132px;
+            position: absolute;
+        }
+
+    .RevertStockLog .order-col2 {
+        float: left;
+        padding: 13px 9px;
+        color: gray;
+    }
+
+    .RevertStockLog .status span.pending {
+        float: left;
+        font-size: 16px;
+        color: orange;
+    }
+
+    .RevertStockLog .status img.righticon {
+        width: 18px;
+        padding: 0 10px;
+        float: left;
+    }
+
+    .RevertStockLog .status span.cancelled {
+        float: left;
+        font-size: 16px;
+        color: indianred;
+    }
+
+    .RevertStockLog .order-title span {
+        /*border-bottom: 1px solid #e5e5e5;*/
+        padding: 4px 10px;
+        font-size: 25px;
+    }
+
+    .RevertStockLog .green {
+        color: green !important;
+    }
+
+    .RevertStockLog .order-left {
+        width: 50%;
+        float: left;
+    }
+
+    .RevertStockLog .order-right {
+        float: left;
+        width: 40%;
+        padding-left: 10%;
+    }
+
+    .RevertStockLog .order-col1 span {
+        float: left;
+        padding: 13px 9px;
+    }
+
+    .RevertStockLog img.icons {
+        float: left;
+    }
+
+    .RevertStockLog .order-right .order-col1 {
+        width: 32%;
+        float: left;
+    }
+
+    .RevertStockLog .sub-title {
+        float: left;
+        width: 100%;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .RevertStockLog .order img.external-link {
+        position: absolute;
+    }
+
+    .RevertStockLog .order-right .customer-email span {
+        padding: 0 5px 0 0;
+    }
+
+    .RevertStockLog .stockchange img.product-external-link {
+        width: 11px;
+        position: ABSOLUTE;
+        MARGIN-LEFT: 2PX;
+    }
+
+    .RevertStockLog td.oredered-quantity {
+        font-size: 25px !important;
+    }
+
+    .RevertStockLog .pagebutton {
+        padding: 8px;
+        margin: 2px;
+        background: gray;
+        border: solid 1px #e2e1e1;
+    }
+/*==================REVERT STOCK LOG Changes==============*/
+
+
+/*=============== Manage WOW Products==================*/
+/*dashboard page*/
+.wowdashboard {
+    width: 100%;
+    display: block;
+}
+
+    .wowdashboard .box {
+        width: 45%;
+        height:200px;
+        cursor:pointer;
+        float: left;
+        margin: 1%;
+        box-shadow: 0 0 0 transparent;
+        border-width: 1px;
+        color: #fff !important;
+        padding: 1rem;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.25rem;
+    }
+        /*.wowdashboard .box.first {
+    background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%) !important;
+}
+.wowdashboard .box.second {
+    background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%) !important;
+}
+.wowdashboard .box.third {
+    background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%) !important;
+}
+.wowdashboard .box.fourth {
+    background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%) !important;
+}*/
+
+        .wowdashboard .box.first {
+            background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%) !important;
+        }
+
+        .wowdashboard .box.second {
+            background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%) !important;
+        }
+
+        .wowdashboard .box.third {
+            background: #5f2c82; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #49a09d, #5f2c82); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #49a09d, #5f2c82); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        .wowdashboard .box.fourth {
+            background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%) !important;
+           
+        }
+
+        .wowdashboard .box.fifth {
+            background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%) !important;
+        }
+
+
+        .wowdashboard .box span {
+            font-size: 20px;
+            font-weight: 100;
+            float: left;
+        }
+/*dashboard page*/
+
+/*wow products page*/
+.wowproducts .filters {
+    width: 100%;
+    float: left;
+}
+
+.wowproducts .control-left {
+    float: left;
+    width: 60%;
+}
+
+.wowproducts .control-right {
+    float: right;
+}
+
+.wowproducts .search:hover {
+    color: white;
+}
+
+.wowproducts .filter-store {
+    float: left;
+    text-align: left;
+}
+
+.wowproducts .filters .first, .wowproducts .filters .second, .wowproducts .filters .third {
+    float: left;
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.wowproducts .filters label {
+    float: left;
+    margin: 10px;
+}
+
+.wowproducts .filters input[type="checkbox"] {
+    margin: 0 0 5px;
+    position: relative;
+    top: 5px;
+    cursor: pointer;
+    padding: 0;
+    left: 5px;
+    width: auto !important;
+    height: 25px;
+    float: left;
+}
+
+.wowproducts .filters .search {
+    background: #333131;
+    position: relative;
+    width: 150px;
+    height: 40px;
+    float: none !important;
+}
+
+.wowproducts .filters .third {
+    text-align: center;
+}
+/*wow products page*/
+
+
+/*edit wow product page*/
+.editwowproduct {
+    width: 100%;
+    float: left;
+}
+
+    .editwowproduct h3 {
+        border-bottom: 1px solid lightgray;
+    }
+
+    .editwowproduct .product-detail {
+        width: 100%;
+        float: left;
+    }
+
+    .editwowproduct .row {
+        width: 100%;
+        float: left;
+        margin: 15px 5px;
+    }
+
+    .editwowproduct .product-ribbons {
+        width: 100%;
+        float: left;
+        margin-top: 30px;
+    }
+
+    .editwowproduct table {
+        width: 100% !important
+    }
+
+.wowproducts .paging {
+    width: 100%;
+    float: left;
+}
+
+
+/*edit wow product page*/
+/*=============== Manage WOW Products==================*/
+
+
+
+/*product ribbon page*/
+.productribbon .highlight {
+    background-color: yellow;
+    color: black;
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.productribbon #ribbonReport th, #ribbonLog th {
+    text-align: left !important;
+}
+
+.productribbon .Filters {
+    width: 100%;
+    float: left;
+    padding: 0 0 10px 0;
+}
+
+.productribbon .p1 {
+    width: 10%;
+    float: left;
+}
+
+.productribbon .p2 {
+    width: 90%;
+    float: left;
+    text-align: left;
+}
+
+.productribbon .Filters section {
+    float: left;
+    padding: 0 50px 0 0;
+}
+
+.productribbon img.filter-icon {
+    height: auto;
+    width: 15px;
+}
+
+.productribbon span.filter-text {
+    font-size: 20px;
+}
+
+.productribbon table#ribbonReport, table#ribbonLog {
+    width: 100%;
+}
+
+.productribbon .img-size {
+    height: auto;
+    width: 90px;
+}
+
+.productribbon .filter-left {
+    float: left;
+    width: 60%;
+    text-align: left;
+}
+
+    .productribbon .filter-left label {
+        float: left;
+        line-height: 29px;
+    }
+
+.productribbon select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+}
+
+.wowproducts select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+}
+/*product ribbon page*/

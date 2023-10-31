@@ -1,0 +1,1707 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B4234720-1A93-4AD9-AE14-81EC71EA44BA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AbsoluteApp</RootNamespace>
+    <AssemblyName>AbsoluteApp</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44369</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.SecurityToken, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AWSSDK.SecurityToken.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.SQS, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AWSSDK.SQS.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyPost, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\EasyPost-Official.4.3.0\lib\netstandard2.0\EasyPost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Identity.Owin.2.2.3\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Cors.4.2.2\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Host.SystemWeb.4.2.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Security.4.2.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Owin.Security.OAuth.4.2.2\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.5.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.5.0.1\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WeblegsClasses, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\WeblegsClasses.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AmazonConnection.cs" />
+    <Compile Include="AmazonCredential.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Authorization\AuthorizationApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\CatalogItems\CatalogApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\FbaInbound\FbaInboundApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\FbaInventory\FbaInventoryApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\FbaSmallandLight\SmallAndLightApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Feeds\FeedsApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Finances\DefaultApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\FulfillmentInbound\FulfillmentInboundApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\FulfillmentOutbound\FbaOutboundApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\ListingsItems\ListingsApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\MerchantFulfillment\MerchantFulfillmentApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Notifications\NotificationsApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Orders\OrdersV0Api.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\ProductFees\FeesApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\ProductPricing\ProductPricingApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Reports\ReportsApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Sales\SalesApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Sellers\SellersApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Services\ServiceApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Shipping\ShippingApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Api\Solicitations\SolicitationsApi.cs" />
+    <Compile Include="AmazonSpApiSDK\Clients\ApiClient.cs" />
+    <Compile Include="AmazonSpApiSDK\Clients\ApiException.cs" />
+    <Compile Include="AmazonSpApiSDK\Clients\ApiResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Clients\Configuration.cs" />
+    <Compile Include="AmazonSpApiSDK\Clients\ExceptionFactory.cs" />
+    <Compile Include="AmazonSpApiSDK\Clients\GlobalConfiguration.cs" />
+    <Compile Include="AmazonSpApiSDK\Clients\IApiAccessor.cs" />
+    <Compile Include="AmazonSpApiSDK\Clients\IReadableConfiguration.cs" />
+    <Compile Include="AmazonSpApiSDK\Clients\SwaggerDateConverter.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Authorization\AuthorizationCode.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Authorization\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Authorization\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Authorization\GetAuthorizationCodeResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\ASINIdentifier.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\AttributeSetList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\AttributeSetListType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\Categories.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\CreatorType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\DecimalWithUnits.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\DimensionType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\GetCatalogItemResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\IdentifierType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\Image.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\Item.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\ItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\LanguageType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\ListCatalogCategoriesResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\ListCatalogItemsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\ListMatchingItemsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\ListOfCategories.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\NumberOfOfferListingsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\OfferListingCountType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\Price.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\QualifiersType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\RelationshipList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\RelationshipType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\SalesRankList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\SalesRankType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\SellerSKUIdentifier.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\CatalogItems\ShippingTimeType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Exceptions\AmazonException.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInbound\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInbound\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInbound\GetItemEligibilityPreviewResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInbound\ItemEligibilityPreview.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\GetInventorySummariesResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\GetInventorySummariesResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\Granularity.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\InventoryDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\InventorySummaries.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\InventorySummary.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\Pagination.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\ResearchingQuantity.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\ResearchingQuantityEntry.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\ReservedQuantity.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaInventory\UnfulfillableQuantity.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\FeeLineItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\FeePreview.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\Item.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\MarketplaceId.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\MoneyType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\SellerSKU.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\SmallAndLightEligibility.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\SmallAndLightEligibilityStatus.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\SmallAndLightEnrollment.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\SmallAndLightEnrollmentStatus.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\SmallAndLightFeePreviewRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FbaSmallandLight\SmallAndLightFeePreviews.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\CancelFeedResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\CreateFeedDocumentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\CreateFeedDocumentResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\CreateFeedDocumentSpecification.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\CreateFeedResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\CreateFeedResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\CreateFeedSpecification.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\Feed.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\FeedDocument.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\FeedDocumentEncryptionDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\FeedList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\FeedOptions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\GetFeedDocumentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\GetFeedResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\GetFeedsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Feeds\GetFeedsResponseV00.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Filters\AmazonFilter.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\AdjustmentEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\AdjustmentEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\AdjustmentItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\AdjustmentItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\AffordabilityExpenseEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\AffordabilityExpenseEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\BigDecimal.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ChargeComponent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ChargeComponentList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ChargeInstrument.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ChargeInstrumentList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\CouponPaymentEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\CouponPaymentEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\Currency.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\Date.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\DebtRecoveryEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\DebtRecoveryEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\DebtRecoveryItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\DebtRecoveryItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\DirectPayment.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\DirectPaymentList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\FBALiquidationEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\FBALiquidationEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\FeeComponent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\FeeComponentList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\FinancialEventGroup.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\FinancialEventGroupList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\FinancialEvents.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ImagingServicesFeeEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ImagingServicesFeeEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ListFinancialEventGroupsPayload.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ListFinancialEventGroupsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ListFinancialEventsPayload.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ListFinancialEventsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\LoanServicingEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\LoanServicingEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\NetworkComminglingTransactionEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\NetworkComminglingTransactionEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\PayWithAmazonEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\PayWithAmazonEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ProductAdsPaymentEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ProductAdsPaymentEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\Promotion.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\PromotionList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\RemovalShipmentEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\RemovalShipmentEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\RemovalShipmentItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\RemovalShipmentItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\RentalTransactionEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\RentalTransactionEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\RetrochargeEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\RetrochargeEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\SAFETReimbursementEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\SAFETReimbursementEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\SAFETReimbursementItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\SAFETReimbursementItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\SellerDealPaymentEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\SellerDealPaymentEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\SellerReviewEnrollmentPaymentEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\SellerReviewEnrollmentPaymentEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ServiceFeeEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ServiceFeeEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ShipmentEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ShipmentEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ShipmentItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\ShipmentItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\SolutionProviderCreditEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\SolutionProviderCreditEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\TaxWithheldComponent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\TaxWithheldComponentList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\TDSReimbursementEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\TDSReimbursementEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\TrialShipmentEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Finances\TrialShipmentEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\Address.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\AmazonPrepFeesDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\AmazonPrepFeesDetailsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\Amount.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ASINInboundGuidance.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ASINInboundGuidanceList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ASINPrepInstructions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ASINPrepInstructionsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\BarcodeInstruction.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\BillOfLadingDownloadURL.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\BoxContentsFeeDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\BoxContentsSource.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\CommonTransportResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\Condition.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ConfirmPreorderResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ConfirmPreorderResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ConfirmTransportResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\Contact.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\CreateInboundShipmentPlanRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\CreateInboundShipmentPlanResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\CreateInboundShipmentPlanResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\CurrencyCode.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\Dimensions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ErrorReason.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\EstimateTransportResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetBillOfLadingResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetInboundGuidanceResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetInboundGuidanceResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetLabelsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetPreorderInfoResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetPreorderInfoResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetPrepInstructionsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetPrepInstructionsResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetShipmentItemsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetShipmentItemsResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetShipmentsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetShipmentsResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetTransportDetailsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GetTransportDetailsResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GuidanceReason.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\GuidanceReasonList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundGuidance.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentHeader.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentInfo.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentPlan.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentPlanItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentPlanItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentPlanList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentPlanRequestItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentPlanRequestItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InboundShipmentResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\IntendedBoxContentsSource.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InvalidASIN.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InvalidASINList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InvalidSKU.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\InvalidSKUList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\LabelDownloadURL.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\LabelPrepPreference.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\LabelPrepType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\NonPartneredLtlDataInput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\NonPartneredLtlDataOutput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\NonPartneredSmallParcelDataInput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\NonPartneredSmallParcelDataOutput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\NonPartneredSmallParcelPackageInput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\NonPartneredSmallParcelPackageInputList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\NonPartneredSmallParcelPackageOutput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\NonPartneredSmallParcelPackageOutputList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PackageStatus.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\Pallet.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PalletList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PartneredEstimate.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PartneredLtlDataInput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PartneredLtlDataOutput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PartneredSmallParcelDataInput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PartneredSmallParcelDataOutput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PartneredSmallParcelPackageInput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PartneredSmallParcelPackageInputList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PartneredSmallParcelPackageOutput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PartneredSmallParcelPackageOutputList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PrepDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PrepDetailsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PrepGuidance.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PrepInstruction.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PrepInstructionList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PrepOwner.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ProNumber.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PutTransportDetailsRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\PutTransportDetailsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\SellerFreightClass.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ShipmentStatus.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\ShipmentType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\SKUInboundGuidance.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\SKUInboundGuidanceList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\SKUPrepInstructions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\SKUPrepInstructionsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\TimeStampStringType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\TransportContent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\TransportDetailInput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\TransportDetailOutput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\TransportHeader.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\TransportResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\TransportStatus.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\UnitOfMeasurement.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\UnitOfWeight.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\UnsignedIntType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\VoidTransportResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentInbound\Weight.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\AdditionalLocationInfo.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\Address.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\Boolean.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CancelFulfillmentOrderResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CODSettings.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CreateFulfillmentOrderItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CreateFulfillmentOrderItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CreateFulfillmentOrderRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CreateFulfillmentOrderResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CreateFulfillmentReturnRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CreateFulfillmentReturnResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CreateFulfillmentReturnResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CreateReturnItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CreateReturnItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\Currency.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\CurrentStatus.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\DeliveryWindow.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\DeliveryWindowList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\EventCode.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\Feature.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\Features.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FeatureSku.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\Fee.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FeeList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentAction.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentOrder.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentOrderItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentOrderItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentOrderList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentOrderStatus.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentPolicy.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentPreview.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentPreviewItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentPreviewItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentPreviewList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentPreviewShipment.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentPreviewShipmentList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentReturnItemStatus.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentShipment.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentShipmentItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentShipmentItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentShipmentList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentShipmentPackage.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\FulfillmentShipmentPackageList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFeatureInventoryResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFeatureInventoryResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFeatureSkuResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFeatureSkuResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFeaturesResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFeaturesResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFulfillmentOrderResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFulfillmentOrderResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFulfillmentPreviewItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFulfillmentPreviewItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFulfillmentPreviewRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFulfillmentPreviewResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetFulfillmentPreviewResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\GetPackageTrackingDetailsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\InvalidItemReason.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\InvalidItemReasonCode.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\InvalidReturnItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\InvalidReturnItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ListAllFulfillmentOrdersResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ListAllFulfillmentOrdersResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ListReturnReasonCodesResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ListReturnReasonCodesResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\NotificationEmailList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\PackageTrackingDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ReasonCodeDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ReasonCodeDetailsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ReturnAuthorization.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ReturnAuthorizationList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ReturnItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ReturnItemDisposition.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ReturnItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ScheduledDeliveryInfo.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ShippingSpeedCategory.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\ShippingSpeedCategoryList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\StringList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\Timestamp.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\TrackingAddress.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\TrackingEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\TrackingEventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\UnfulfillablePreviewItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\UnfulfillablePreviewItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\UpdateFulfillmentOrderItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\UpdateFulfillmentOrderItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\UpdateFulfillmentOrderRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\UpdateFulfillmentOrderResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\FulfillmentOutbound\Weight.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\FulfillmentAvailability.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\Issue.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\Item.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ItemAttributes.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ItemImage.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ItemIssues.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ItemOfferByMarketplace.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ItemOffers.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ItemProcurement.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ItemSummaries.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ItemSummaryByMarketplace.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ListingsItemPatchRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ListingsItemPutRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\ListingsItemSubmissionResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\Money.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\PatchOperation.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ListingsItems\Points.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AdditionalInputs.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AdditionalInputsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AdditionalSellerInput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AdditionalSellerInputs.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AdditionalSellerInputsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\Address.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AvailableCarrierWillPickUpOption.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AvailableCarrierWillPickUpOptionsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AvailableDeliveryExperienceOption.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AvailableDeliveryExperienceOptionsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AvailableFormatOptionsForLabel.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AvailableFormatOptionsForLabelList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\AvailableShippingServiceOptions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\CancelShipmentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\CarrierWillPickUpOption.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\Constraint.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\Constraints.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\CreateShipmentRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\CreateShipmentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\CurrencyAmount.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\DeliveryExperienceOption.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\DeliveryExperienceType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\FileContents.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\FileType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\GetAdditionalSellerInputsRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\GetAdditionalSellerInputsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\GetAdditionalSellerInputsResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\GetEligibleShipmentServicesRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\GetEligibleShipmentServicesResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\GetEligibleShipmentServicesResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\GetShipmentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\HazmatType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\InputTargetType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\Item.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\ItemLevelFields.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\ItemLevelFieldsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\ItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\Label.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\LabelCustomization.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\LabelDimensions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\LabelFormat.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\LabelFormatList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\LabelFormatOption.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\LabelFormatOptionRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\Length.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\PackageDimensions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\PredefinedPackageDimensions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\RejectedShippingService.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\RejectedShippingServiceList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\RestrictedSetValues.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\SellerInputDefinition.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\Shipment.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\ShipmentRequestDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\ShipmentStatus.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\ShippingOfferingFilter.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\ShippingService.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\ShippingServiceList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\ShippingServiceOptions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\StandardIdForLabel.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\TemporarilyUnavailableCarrier.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\TemporarilyUnavailableCarrierList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\TermsAndConditionsNotAcceptedCarrier.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\TermsAndConditionsNotAcceptedCarrierList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\TransparencyCodeList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\UnitOfLength.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\UnitOfWeight.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\MerchantFulfillment\Weight.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\Attachment.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\Buyer.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateAmazonMotorsRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateAmazonMotorsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateConfirmCustomizationDetailsRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateConfirmCustomizationDetailsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateConfirmDeliveryDetailsRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateConfirmDeliveryDetailsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateConfirmOrderDetailsRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateConfirmOrderDetailsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateConfirmServiceDetailsRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateConfirmServiceDetailsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateDigitalAccessKeyRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateDigitalAccessKeyResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateLegalDisclosureRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateLegalDisclosureResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateNegativeFeedbackRemovalResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateUnexpectedProblemRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateUnexpectedProblemResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateWarrantyRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\CreateWarrantyResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\Embedded.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\GetAttributesResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\GetMessagingActionResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\GetMessagingActionsForOrderResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\GetMessagingActionsForOrderResponseLinks.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\GetSchemaResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\LinkObject.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\MessagingAction.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Messaging\Schema.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\CreateDestinationRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\CreateDestinationResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\CreateSubscriptionRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\CreateSubscriptionResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\DeleteDestinationResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\DeleteSubscriptionByIdResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\Destination.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\DestinationList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\DestinationResource.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\DestinationResourceSpecification.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\EventBridgeResource.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\EventBridgeResourceSpecification.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\GetDestinationResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\GetDestinationsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\GetSubscriptionByIdResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\GetSubscriptionResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\SqsResource.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Notifications\Subscription.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\Address.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\BuyerCustomizedInfoDetail.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\BuyerInfo.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\BuyerTaxInfo.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\FulfillmentInstruction.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\GetOrderAddressResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\GetOrderBuyerInfoResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\GetOrderItemsBuyerInfoResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\GetOrderItemsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\GetOrderResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\GetOrdersResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\MarketplaceTaxInfo.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\Money.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\Order.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\OrderAddress.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\OrderBuyerInfo.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\OrderItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\OrderItemBuyerInfo.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\OrderItemBuyerInfoList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\OrderItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\OrderItemsBuyerInfoList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\OrderItemsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\OrderList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\OrdersList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\PaymentExecutionDetailItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\PaymentExecutionDetailItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\PaymentMethodDetailItemList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\PointsGrantedDetail.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\ProductInfoDetail.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\PromotionIdList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\TaxClassification.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Orders\TaxCollection.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\FeeDetail.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\FeeDetailList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\FeesEstimate.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\FeesEstimateError.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\FeesEstimateErrorDetail.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\FeesEstimateIdentifier.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\FeesEstimateRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\FeesEstimateResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\GetMyFeesEstimateRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\GetMyFeesEstimateResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\GetMyFeesEstimateResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\GetMyFeesEstimatesResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\IdTypeEnum.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\IncludedFeeDetail.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\IncludedFeeDetailList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\MoneyType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\OptionalFulfillmentProgramEnum.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\Points.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductFees\PriceToEstimateFees.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\ASINIdentifier.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\AttributeSetList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\BuyBoxEligibleOffers.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\BuyBoxPrices.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\BuyBoxPriceType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\CompetitivePriceList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\CompetitivePriceType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\CompetitivePricingType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\ConditionType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\DetailedShippingTimeType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\FulfillmentChannelType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\GetBatchOffersResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\GetOffersHttpStatusLine.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\GetOffersResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\GetOffersResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\GetPricingResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\HttpResponseHeaders.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\IdentifierType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\ItemIdentifier.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\ItemOffersResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\LowestPrices.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\LowestPriceType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\MoneyType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\NumberOfOfferListingsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\NumberOfOffers.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\OfferCountType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\OfferDetail.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\OfferDetailList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\OfferListingCountType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\OffersList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\OfferType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\Points.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\Price.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\PriceList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\PriceType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\PrimeInformationType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\Product.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\QuantityDiscountPriceType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\RelationshipList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\SalesRankList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\SalesRankType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\SellerFeedbackType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\SellerSKUIdentifier.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\ShipsFromType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductPricing\Summary.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductTypes\LocaleEnum.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductTypes\ProductType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductTypes\ProductTypeDefinition.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductTypes\ProductTypeList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductTypes\ProductTypeVersion.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductTypes\PropertyGroup.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductTypes\RequirementsEnforcedEnum.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ProductTypes\SchemaLink.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\CancelReportResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\CancelReportScheduleResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\CreateReportResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\CreateReportResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\CreateReportScheduleResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\CreateReportScheduleResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\CreateReportScheduleSpecification.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\CreateReportSpecification.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\GetReportDocumentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\GetReportResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\GetReportScheduleResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\GetReportSchedulesResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\GetReportSchedulesResponseV00.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\GetReportsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\GetReportsResponseV00.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\Report.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\ReportDocument.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\ReportDocumentEncryptionDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\ReportList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\ReportOptions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\ReportSchedule.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Reports\ReportScheduleList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Restrictions\ConditionType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Restrictions\Link.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Restrictions\Reason.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Restrictions\Restriction.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Restrictions\RestrictionList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sales\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sales\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sales\GetOrderMetricsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sales\ModelDecimal.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sales\Money.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sales\OrderMetricsInterval.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sales\OrderMetricsList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sellers\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sellers\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sellers\GetMarketplaceParticipationsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sellers\Marketplace.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sellers\MarketplaceParticipation.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sellers\MarketplaceParticipationList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Sellers\Participation.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\AddAppointmentRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\Address.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\Appointment.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\AppointmentId.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\AppointmentTime.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\AppointmentTimeInput.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\AssociatedItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\Buyer.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\CancelServiceJobByServiceJobIdResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\CompleteServiceJobByServiceJobIdResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\GetServiceJobByServiceJobIdResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\GetServiceJobsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\ItemDelivery.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\ItemDeliveryPromise.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\JobListing.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\OrderId.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\Poa.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\RescheduleAppointmentRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\RescheduleReasonCode.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\ScopeOfWork.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\Seller.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\ServiceJob.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\ServiceJobId.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\ServiceJobProvider.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\ServiceLocation.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\SetAppointmentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\Technician.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\Warning.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Services\WarningList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ShipmentInvoicing\GetInvoiceStatusResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ShipmentInvoicing\GetShipmentDetailsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ShipmentInvoicing\ShipmentDetail.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ShipmentInvoicing\ShipmentInvoiceStatusInfo.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ShipmentInvoicing\ShipmentItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ShipmentInvoicing\SubmitInvoiceRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\ShipmentInvoicing\SubmitInvoiceResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\AcceptedRate.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Account.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\AccountId.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Address.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\CancelShipmentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\City.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ClientReferenceId.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Container.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ContainerItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ContainerList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ContainerReferenceId.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ContainerSpecification.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ContainerSpecificationList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\CountryCode.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\CreateShipmentRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\CreateShipmentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\CreateShipmentResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Currency.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Dimensions.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\EventCode.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\EventList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\GetAccountResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\GetRatesRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\GetRatesResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\GetRatesResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\GetShipmentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\GetTrackingInformationResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Label.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\LabelResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\LabelResultList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\LabelSpecification.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\LabelStream.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Location.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ModelEvent.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Party.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\PostalCode.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\PromisedDeliveryDate.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\PurchaseLabelsRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\PurchaseLabelsResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\PurchaseLabelsResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\PurchaseShipmentRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\PurchaseShipmentResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\PurchaseShipmentResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Rate.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\RateId.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\RateList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\RetrieveShippingLabelRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\RetrieveShippingLabelResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\RetrieveShippingLabelResult.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ServiceRate.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ServiceRateList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ServiceType.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ServiceTypeList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Shipment.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ShipmentId.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\ShippingPromiseSet.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\StateOrRegion.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\TimeRange.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\TrackingInformation.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\TrackingSummary.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Shipping\Weight.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\CreateProductReviewAndSellerFeedbackSolicitationResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\GetSchemaResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\GetSchemaResponseLinks.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\GetSolicitationActionResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\GetSolicitationActionResponseEmbedded.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\GetSolicitationActionResponseLinks.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\GetSolicitationActionsForOrderResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\GetSolicitationActionsForOrderResponseEmbedded.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\GetSolicitationActionsForOrderResponseLinks.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\LinkObject.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\Schema.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Solicitations\SolicitationsAction.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Token\AWSAuthenticationTokenData.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Token\CacheTokenData.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Token\CreateRestrictedDataTokenData.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Token\CreateRestrictedDataTokenRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Token\CreateRestrictedDataTokenResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Token\RestrictedResource.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Token\TokenResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Upload\CreateUploadDestinationResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Upload\Error.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Upload\ErrorList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\Upload\UploadDestination.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\AcknowledgementStatus.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\Address.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\GetOrderResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\GetOrdersResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\GiftDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\ItemQuantity.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\Order.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\OrderAcknowledgementItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\OrderDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\OrderItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\OrderItemAcknowledgement.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\OrderList.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\Pagination.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\PartyIdentification.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\ScheduledDeliveryShipment.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\ShipmentDates.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\ShipmentDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\SubmitAcknowledgementRequest.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\SubmitAcknowledgementResponse.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\TaxDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\TaxLineItem.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\TaxRegistrationDetails.cs" />
+    <Compile Include="AmazonSpApiSDK\Models\VendorDirectFulfillmentOrders\TransactionId.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\AWSAuthenticationCredentials.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\AWSSignerHelper.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\AWSSigV4Signer.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\IDateHelper.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\LWAAccessTokenRequestMeta.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\LWAAccessTokenRequestMetaBuilder.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\LWAAuthorizationCredentials.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\LWAClient.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\ScopeConstants.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\SigningDateHelper.cs" />
+    <Compile Include="AmazonSpApiSDK\Runtime\Utils.cs" />
+    <Compile Include="AmzCreds.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
+    <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
+    <Compile Include="Areas\HelpPage\Controllers\HelpController.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageAreaRegistration.cs" />
+    <Compile Include="Areas\HelpPage\HelpPageConfigurationExtensions.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\CollectionModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ComplexTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\DictionaryModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\EnumValueDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\IModelDocumentationProvider.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\KeyValuePairModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelDescriptionGenerator.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameAttribute.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ModelNameHelper.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterAnnotation.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\ParameterDescription.cs" />
+    <Compile Include="Areas\HelpPage\ModelDescriptions\SimpleTypeModelDescription.cs" />
+    <Compile Include="Areas\HelpPage\Models\HelpPageApiModel.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ImageSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\InvalidSample.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\ObjectGenerator.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
+    <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
+    <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="ConstructFeed\BaseMessage.cs" />
+    <Compile Include="ConstructFeed\BaseXML.cs" />
+    <Compile Include="ConstructFeed\ConstructFeedService.cs" />
+    <Compile Include="ConstructFeed\FeedAmazonEnvelope.cs" />
+    <Compile Include="ConstructFeed\Messages\AmazonAppMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\AutoPartsItemMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\CatPILMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\CharacterDataMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\Condition.cs" />
+    <Compile Include="ConstructFeed\Messages\CustomerMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\CustomerReportMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\DescriptionData.cs" />
+    <Compile Include="ConstructFeed\Messages\EnhancedContentMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\ExternalCustomerMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\ExternalOrderMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\FeedHeader.cs" />
+    <Compile Include="ConstructFeed\Messages\FulfillmentCenterMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\FulfillmentOrderCancellationRequestMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\FulfillmentOrderRequestMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\ImageMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\InventoryMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\InvoiceConfirmationMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\ItemMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\LocalMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\LoyaltyMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\MSVatMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\MultiChannelOrderReportMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\NavigationReportMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\OfferMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\OrderAcknowledgementMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\OrderAdjustmentMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\OrderFulfillmentMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\OrderNotificationReportMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\OrderReportMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\OrderSourcingOnDemandMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\OverrideMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\PendingOrderReportMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\PointOfSaleMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\PriceMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\ProcessingReportMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\ProductImageMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\ProductMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\PromotionRequestMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\PurchaseConfirmationMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\RelationshipMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\ReverseItemMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\RichContentMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\SalesAdjustmentMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\SalesHistoryMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\SettlementReportMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\StandardPrice.cs" />
+    <Compile Include="ConstructFeed\Messages\StandardProductID.cs" />
+    <Compile Include="ConstructFeed\Messages\StandardProductMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\StoreMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\StoreStockMovementMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\TestOrderRequestMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\TradeInPriceMessage.cs" />
+    <Compile Include="ConstructFeed\Messages\WebstoreItemMessage.cs" />
+    <Compile Include="ConstructFeed\xsd\Inventory.cs">
+      <DependentUpon>Inventory.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ConstructFeed\xsd\Product.cs">
+      <DependentUpon>Product.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AbsoluteNonPrimeController.cs" />
+    <Compile Include="Controllers\CreatePicklistforShippingClassController.cs" />
+    <Compile Include="Controllers\CreatePickListOutOfDCController.cs" />
+    <Compile Include="Controllers\CreateShopReplenishController.cs" />
+    <Compile Include="Controllers\CreateShopReplenishpicklistController.cs" />
+    <Compile Include="Controllers\CreateShopReplenishVersion2Controller.cs" />
+    <Compile Include="Controllers\DeleteLockController.cs" />
+    <Compile Include="Controllers\GetLoackingEntriesController.cs" />
+    <Compile Include="Controllers\GetManifestController.cs" />
+    <Compile Include="Controllers\GetPickedOrdersController.cs" />
+    <Compile Include="Controllers\GetPickedOrdersVersion2Controller.cs" />
+    <Compile Include="Controllers\GetPicklistByBatchIdController.cs" />
+    <Compile Include="Controllers\GetPickListVersion2Controller.cs" />
+    <Compile Include="Controllers\GetPreOrderPickListController.cs" />
+    <Compile Include="Controllers\GetPreOrdersfirstController.cs" />
+    <Compile Include="Controllers\GetShopReplenishSKUController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InsertNewLockController.cs" />
+    <Compile Include="Controllers\JadlamLabelController.cs" />
+    <Compile Include="Controllers\JadlamOrderController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
+    <Compile Include="Controllers\PicklistController.cs" />
+    <Compile Include="Controllers\PickListOrderSearchController.cs" />
+    <Compile Include="Controllers\ReverseValidateAllPicklistController.cs" />
+    <Compile Include="Controllers\RunProcessShipmentController.cs" />
+    <Compile Include="Controllers\Search2Controller.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SplitPicklistController.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
+    <Compile Include="Controllers\UpdatePicksController.cs" />
+    <Compile Include="Controllers\UpdatePicksVersion2Controller.cs" />
+    <Compile Include="Controllers\ValidateAllPickListsController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="CreatingPicklistOutOfPreOrdersController.cs" />
+    <Compile Include="GetPickListController.cs" />
+    <Compile Include="NotificationMessages\AnyOfferChangedNotification.cs" />
+    <Compile Include="NotificationMessages\B2BAnyOfferChangedNotification.cs" />
+    <Compile Include="NotificationMessages\BuyBoxEligibleOfferElement.cs" />
+    <Compile Include="NotificationMessages\BuyBoxPriceElement.cs" />
+    <Compile Include="NotificationMessages\BuyBoxPricePoints.cs" />
+    <Compile Include="NotificationMessages\CarrierCode.cs" />
+    <Compile Include="NotificationMessages\EventTime.cs" />
+    <Compile Include="NotificationMessages\FbaOutboundShipmentStatusNotification.cs" />
+    <Compile Include="NotificationMessages\FeeDetailElement.cs" />
+    <Compile Include="NotificationMessages\FeePromotionNotification.cs" />
+    <Compile Include="NotificationMessages\FeesEstimate.cs" />
+    <Compile Include="NotificationMessages\FulfillmentOrderStatusNotification.cs" />
+    <Compile Include="NotificationMessages\FulfillmentReturnItem.cs" />
+    <Compile Include="NotificationMessages\FulfillmentShipment.cs" />
+    <Compile Include="NotificationMessages\IdentifierElement.cs" />
+    <Compile Include="NotificationMessages\IdentifierValueElement.cs" />
+    <Compile Include="NotificationMessages\IncludedFeeElement.cs" />
+    <Compile Include="NotificationMessages\Info.cs" />
+    <Compile Include="NotificationMessages\LowestPriceElement.cs" />
+    <Compile Include="NotificationMessages\LowestPricePoints.cs" />
+    <Compile Include="NotificationMessages\MoneyType.cs" />
+    <Compile Include="NotificationMessages\NotificationMessageResponce.cs" />
+    <Compile Include="NotificationMessages\NotificationMetadata.cs" />
+    <Compile Include="NotificationMessages\NotificationPayload.cs" />
+    <Compile Include="NotificationMessages\NumberOfBuyBoxEligibleOfferElement.cs" />
+    <Compile Include="NotificationMessages\NumberOfOfferElement.cs" />
+    <Compile Include="NotificationMessages\Offer.cs" />
+    <Compile Include="NotificationMessages\OfferChangeTrigger.cs" />
+    <Compile Include="NotificationMessages\OfferElement.cs" />
+    <Compile Include="NotificationMessages\OfferPoints.cs" />
+    <Compile Include="NotificationMessages\Price.cs" />
+    <Compile Include="NotificationMessages\PrimeInformation.cs" />
+    <Compile Include="NotificationMessages\PromotionActiveTimeRange.cs" />
+    <Compile Include="NotificationMessages\PromotionInformationElement.cs" />
+    <Compile Include="NotificationMessages\SalesRankingElement.cs" />
+    <Compile Include="NotificationMessages\SellerFeedbackRating.cs" />
+    <Compile Include="NotificationMessages\ShippingTime.cs" />
+    <Compile Include="NotificationMessages\ShipsFrom.cs" />
+    <Compile Include="NotificationMessages\Summary.cs" />
+    <Compile Include="Parameter\Authorization\ParameterAuthorizationCode.cs" />
+    <Compile Include="Parameter\CatalogItems\ParameterGetCatalogItem.cs" />
+    <Compile Include="Parameter\CatalogItems\ParameterListCatalogItems.cs" />
+    <Compile Include="Parameter\FbaInboundEligibility\ParameterGetItemEligibilityPreview.cs" />
+    <Compile Include="Parameter\FbaInventory\ParameterGetInventorySummaries.cs" />
+    <Compile Include="Parameter\Feed\ParameterGetFeed.cs" />
+    <Compile Include="Parameter\Finance\ParameterListFinancialEventGroup.cs" />
+    <Compile Include="Parameter\Finance\ParameterListFinancialEvents.cs" />
+    <Compile Include="Parameter\FulFillmentInbound\ParameterGetInboundGuidance.cs" />
+    <Compile Include="Parameter\FulFillmentInbound\ParameterGetLabels.cs" />
+    <Compile Include="Parameter\FulFillmentInbound\ParameterGetPrepInstructions.cs" />
+    <Compile Include="Parameter\FulFillmentInbound\ParameterGetShipmentItems.cs" />
+    <Compile Include="Parameter\FulFillmentInbound\ParameterGetShipments.cs" />
+    <Compile Include="Parameter\FulFillmentOutbound\ParameterListAllFulfillmentOrders.cs" />
+    <Compile Include="Parameter\FulFillmentOutbound\ParameterListReturnReasonCodes.cs" />
+    <Compile Include="Parameter\IAmazonSerach.cs" />
+    <Compile Include="Parameter\IgnoreToAddParameterAttribute.cs" />
+    <Compile Include="Parameter\IParameterBasedPII.cs" />
+    <Compile Include="Parameter\ListingsItems\ParameterAttributeItem.cs" />
+    <Compile Include="Parameter\ListingsItems\ParameterAttributes.cs" />
+    <Compile Include="Parameter\ListingsItems\ParameterDeleteListingItem.cs" />
+    <Compile Include="Parameter\ListingsItems\ParameterGetListingsItem.cs" />
+    <Compile Include="Parameter\ListingsItems\ParameterListingItemCommon.cs" />
+    <Compile Include="Parameter\ListingsItems\ParameterPatchListingItem.cs" />
+    <Compile Include="Parameter\ListingsItems\ParameterPutListingItem.cs" />
+    <Compile Include="Parameter\Notification\IMessageReceiver.cs" />
+    <Compile Include="Parameter\Notification\ParameterCreateDestination.cs" />
+    <Compile Include="Parameter\Notification\ParameterCreateSubscription.cs" />
+    <Compile Include="Parameter\Notification\ParameterMessageReceiver.cs" />
+    <Compile Include="Parameter\Order\ParameterGetOrder.cs" />
+    <Compile Include="Parameter\Order\ParameterOrderList.cs" />
+    <Compile Include="Parameter\ParameterBased.cs" />
+    <Compile Include="Parameter\ParameterBasedPII.cs" />
+    <Compile Include="Parameter\ParameterMarketplaceId.cs" />
+    <Compile Include="Parameter\ProductFee\FeesEstimateByIdRequest.cs" />
+    <Compile Include="Parameter\ProductFee\ParameterGetMyFeesEstimatesRequest.cs" />
+    <Compile Include="Parameter\ProductPricing\HttpMethodEnum.cs" />
+    <Compile Include="Parameter\ProductPricing\ItemOffersRequest.cs" />
+    <Compile Include="Parameter\ProductPricing\ListingOffersRequest.cs" />
+    <Compile Include="Parameter\ProductPricing\ParameterGetCompetitivePricing.cs" />
+    <Compile Include="Parameter\ProductPricing\ParameterGetItemOffers.cs" />
+    <Compile Include="Parameter\ProductPricing\ParameterGetItemOffersBatchRequest.cs" />
+    <Compile Include="Parameter\ProductPricing\ParameterGetListingOffers.cs" />
+    <Compile Include="Parameter\ProductPricing\ParameterGetListingOffersBatchRequest.cs" />
+    <Compile Include="Parameter\ProductPricing\ParameterGetPricing.cs" />
+    <Compile Include="Parameter\ProductTypes\GetDefinitionsProductTypeParameter.cs" />
+    <Compile Include="Parameter\ProductTypes\SearchDefinitionsProductTypesParameter.cs" />
+    <Compile Include="Parameter\Report\ParameterCreateReportScheduleSpecification.cs" />
+    <Compile Include="Parameter\Report\ParameterCreateReportSpecification.cs" />
+    <Compile Include="Parameter\Report\ParameterReportList.cs" />
+    <Compile Include="Parameter\Report\ParameterReportSchedules.cs" />
+    <Compile Include="Parameter\Restrictions\ParameterGetListingsRestrictions.cs" />
+    <Compile Include="Parameter\Sales\ParameterGetOrderMetrics.cs" />
+    <Compile Include="Parameter\Upload\ParameterCreateUploadDestinationForResource.cs" />
+    <Compile Include="Parameter\VendorDirectFulfillmentOrders\ParameterVendorDirectFulfillmentGetOrders.cs" />
+    <Compile Include="PickListGetOrdersByEanController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportGeneration\DataConverter.cs" />
+    <Compile Include="ReportGeneration\FeedbackOrderReport.cs" />
+    <Compile Include="ReportGeneration\InventoryAgingReport.cs" />
+    <Compile Include="ReportGeneration\OrdersReport.cs" />
+    <Compile Include="ReportGeneration\ProductAFNInventoryReport.cs" />
+    <Compile Include="ReportGeneration\ProductsReport.cs" />
+    <Compile Include="ReportGeneration\ReimbursementsOrderReport.cs" />
+    <Compile Include="ReportGeneration\ReportDataTable\RowExtensionMethods.cs" />
+    <Compile Include="ReportGeneration\ReportDataTable\Table.cs" />
+    <Compile Include="ReportGeneration\ReportDataTable\TableRow.cs" />
+    <Compile Include="ReportGeneration\ReportDataTable\TableRows.cs" />
+    <Compile Include="ReportGeneration\ReportDateRange.cs" />
+    <Compile Include="ReportGeneration\ReportManager.cs" />
+    <Compile Include="ReportGeneration\ReturnFBAOrderReport.cs" />
+    <Compile Include="ReportGeneration\ReturnFBMOrderReport.cs" />
+    <Compile Include="ReportGeneration\SettlementOrderReport.cs" />
+    <Compile Include="Response\JadlamResponseJson.cs" />
+    <Compile Include="Services\ApiUrls.cs" />
+    <Compile Include="Services\AplusContentService.cs" />
+    <Compile Include="Services\AuthorizationService.cs" />
+    <Compile Include="Services\CatalogItemService.cs" />
+    <Compile Include="Services\FbaInboundEligibilityService.cs" />
+    <Compile Include="Services\FbaInboundService.cs" />
+    <Compile Include="Services\FbaInventoryService.cs" />
+    <Compile Include="Services\FbaOutboundService.cs" />
+    <Compile Include="Services\FbaSmallandLightService.cs" />
+    <Compile Include="Services\FeedService.cs" />
+    <Compile Include="Services\FinancialService.cs" />
+    <Compile Include="Services\FulFillmentInboundService.cs" />
+    <Compile Include="Services\FulFillmentOutboundService.cs" />
+    <Compile Include="Services\ListingsItemService.cs" />
+    <Compile Include="Services\MerchantFulfillmentService.cs" />
+    <Compile Include="Services\MessagingService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Services\OrderService.cs" />
+    <Compile Include="Services\ProductFeeService.cs" />
+    <Compile Include="Services\ProductPricingService.cs" />
+    <Compile Include="Services\ProductTypeService.cs" />
+    <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Services\RequestService.cs" />
+    <Compile Include="Services\RestrictionService.cs" />
+    <Compile Include="Services\SalesService.cs" />
+    <Compile Include="Services\SellerService.cs" />
+    <Compile Include="Services\ServicesService.cs" />
+    <Compile Include="Services\ShipmentInvoicingService.cs" />
+    <Compile Include="Services\ShippingService.cs" />
+    <Compile Include="Services\SolicitationService.cs" />
+    <Compile Include="Services\TokenGeneration.cs" />
+    <Compile Include="Services\TokenService.cs" />
+    <Compile Include="Services\UploadService.cs" />
+    <Compile Include="Services\VendorDirectFulfillmentOrderService.cs" />
+    <Compile Include="SimpleAuthorizationServerProvider.cs" />
+    <Compile Include="SimpleRefreshTokenProvider.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utils\Constants.cs" />
+    <Compile Include="Utils\Country.cs" />
+    <Compile Include="Utils\DoubleJsonConverter.cs" />
+    <Compile Include="Utils\EasyMD5.cs" />
+    <Compile Include="Utils\ErrorResponseHelper.cs" />
+    <Compile Include="Utils\FileTransform.cs" />
+    <Compile Include="Utils\LinqHelper.cs" />
+    <Compile Include="Utils\MarketPlace.cs" />
+    <Compile Include="Utils\MarketplaceIds.cs" />
+    <Compile Include="Utils\RateLimits.cs" />
+    <Compile Include="Utils\RateLimitsDefinitions.cs" />
+    <Compile Include="Utils\RateLimitType.cs" />
+    <Compile Include="Utils\Region.cs" />
+    <Compile Include="Utils\Sandbox.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="ConstructFeed\xsd\readme.txt" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\HelpPage\Views\Web.config" />
+    <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Index.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TextSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\SimpleTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Samples.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\Parameters.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ModelDescriptionLink.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\KeyValuePairModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\InvalidSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ImageSample.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\EnumTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\DictionaryModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
+    <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <None Include="ConstructFeed\xsd\AdditionalProductInformation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Amazon.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\amzn-base.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Arts.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\AutoAccessory.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Baby.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Beauty.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Books.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\CameraPhoto.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\CartonContentsRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\CE.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\ClothingAccessories.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Coins.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Collectibles.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Computers.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\EducationSupplies.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\EntertainmentCollectibles.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\EUCompliance.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\FBA.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\FoodAndBeverages.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\FoodServiceAndJanSan.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\FulfillmentOrderCancellationRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\FulfillmentOrderRequest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Furniture.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\GiftCards.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Gourmet.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Health.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Home.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\HomeImprovement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Industrial.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Inventory.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\InvoiceConfirmation.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Jewelry.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\LabSupplies.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\LargeAppliances.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Lighting.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\LightMotor.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Luggage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\LuxuryBeauty.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\MaterialHandling.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\MechanicalFasteners.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Miscellaneous.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Motorcycles.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Music.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\MusicalInstruments.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Office.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\OrderAcknowledgement.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\OrderAdjustment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\OrderFulfillment.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\OrderSourcingOnDemand.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Outdoors.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Override.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\PetSupplies.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\PowerTransmission.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Price.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Product.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\ProductClothing.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\ProductImage.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\ProfessionalHealthCare.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\RawMaterials.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Relationship.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Shoes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Sports.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\SportsMemorabilia.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\SWVG.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\ThreeDPrinting.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\TiresAndWheels.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Tools.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Toys.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\ToysBaby.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Video.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\WineAndAlcohol.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ConstructFeed\xsd\Wireless.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\JadlamLabel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.min.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52585</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44369/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
