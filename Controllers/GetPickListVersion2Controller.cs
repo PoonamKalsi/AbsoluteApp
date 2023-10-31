@@ -64,13 +64,7 @@ namespace AbsoluteApp.Controllers
                     cmd.ExecuteNonQuery();
                     con.Close();
                 }
-                using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set [Status To Display]='Complete' where BatchId in ( select BatchId from JadlamPickList where [Request Type]<>'MSMQW' AND TotalSKUs=PickedSKUs and PartialSKUs=0 )", con))
-                {
-                    if (con.State == ConnectionState.Closed)
-                        con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                }
+
 
                 DataTable dt = new DataTable();
 
