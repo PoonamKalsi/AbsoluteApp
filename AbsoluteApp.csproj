@@ -1176,6 +1176,7 @@
     <Compile Include="Controllers\GetPreOrderPickListController.cs" />
     <Compile Include="Controllers\GetPreOrdersfirstController.cs" />
     <Compile Include="Controllers\GetShopReplenishSKUController.cs" />
+    <Compile Include="Controllers\GetUnshippedOrdersByBatchIdController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsertNewLockController.cs" />
     <Compile Include="Controllers\JadlamLabelController.cs" />
@@ -1189,6 +1190,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SplitPicklistController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
+    <Compile Include="Controllers\UpdatePicklistVersion12Controller.cs" />
     <Compile Include="Controllers\UpdatePicksController.cs" />
     <Compile Include="Controllers\UpdatePicksVersion2Controller.cs" />
     <Compile Include="Controllers\ValidateAllPickListsController.cs" />

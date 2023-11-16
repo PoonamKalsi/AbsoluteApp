@@ -59,6 +59,25 @@ namespace AbsoluteApp.Controllers
                     response1.Content = new StringContent(JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(failedresponse)).ToString(), Encoding.UTF8, "application/json");
                     return response1;
                 }
+
+                //Killing the processes before starting a new one.
+
+                string exeName = "PickListGenerator.exe"; // Replace with the actual name of your executable
+
+                // Get all processes with the specified name
+                Process[] processes = Process.GetProcessesByName(exeName);
+
+                // Kill each existing process
+                foreach (Process process in processes)
+                {
+                    if (process.Id != Process.GetCurrentProcess().Id)
+                    {
+                        process.Kill();
+                    }
+                }
+
+
+
                 Process p = new Process();
                 p.StartInfo.FileName = ConfigurationManager.AppSettings["ExePath"].ToString();
                 p.StartInfo.Arguments= i.ToString()+" " +type+ " "+ " ";

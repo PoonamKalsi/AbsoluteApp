@@ -1,20 +1,21 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
-using System.Data.SqlClient;
-using System.Configuration;
 
 namespace AbsoluteApp.Controllers
 {
-    public class GetPicklistByBatchIdController : ApiController
+    public class GetUnshippedOrdersByBatchIdController : ApiController
     {
-        public HttpResponseMessage Get(HttpRequestMessage request, string BatchId, string ShowPickedOrders = "false")
+        // GET api/<controller>
+        public HttpResponseMessage Get(HttpRequestMessage request, string BatchId, int size, int skip)
         {
             try
             {
@@ -34,12 +35,13 @@ namespace AbsoluteApp.Controllers
                 DataTable dt = new DataTable();
                 using (SqlConnection con = connection)
                 {
-                    using (SqlCommand cmd = new SqlCommand("GetPickListByBatchId", con))
+                    using (SqlCommand cmd = new SqlCommand("GetUnshippedPickListByBatchId", con))
                     {
                         if (con.State == System.Data.ConnectionState.Closed)
                             con.Open();
                         cmd.Parameters.AddWithValue("@Batch", BatchId);
-                        cmd.Parameters.AddWithValue("@ShowPickedOrders", ShowPickedOrders);
+                        cmd.Parameters.AddWithValue("@size", size);
+                        cmd.Parameters.AddWithValue("@skip", skip);
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 90;
                         SqlDataAdapter adp = new SqlDataAdapter(cmd);
@@ -70,12 +72,12 @@ namespace AbsoluteApp.Controllers
                             pickList1.SiteName = row["Site Name"].ToString();
                             pickList1.ShippingCarrierForMSMQW = row["ShippingCarrier"].ToString();
                             pickList1.ShippingClassForMSMQW = row["ShippingClass"].ToString();
-                            pickList1.AmazonLabelPrinted= string.IsNullOrEmpty(row["ShipmentID"].ToString())?false:true;
+                            pickList1.AmazonLabelPrinted = string.IsNullOrEmpty(row["ShipmentID"].ToString()) ? false : true;
                             pickList1.EasyPostLabelPrinted = string.IsNullOrEmpty(row["labelUrl"].ToString()) ? false : true;
                             pickList1.DistributionCenterCode = row["DistributionCenterCode"].ToString();
                             pickList1.AttEAN = string.IsNullOrEmpty(row["AttEAN"].ToString()) ? "" : row["AttEAN"].ToString();
                             pickList1.IsHold = string.IsNullOrEmpty(row["IsHold"].ToString()) ? "" : row["IsHold"].ToString();
-                            pickList1.IsHold = row["IsHold"].ToString()=="false" ? "" : pickList1.IsHold;
+                            pickList1.IsHold = row["IsHold"].ToString() == "false" ? "" : pickList1.IsHold;
 
                             IList<OrderQuantity> orderQuantities = new List<OrderQuantity>();
                             pickList1.OrderQuantity = orderQuantities;
@@ -111,7 +113,7 @@ namespace AbsoluteApp.Controllers
                                 orderQuantity.OrderNumber = Convert.ToInt32(order.Split('?')[0].Trim());
                                 orderQuantity.Quanity = Convert.ToInt32(order.Split('?')[1].Trim());
                                 orderQuantity.ShippingClass = order.Split('?')[2].Trim();
-                                orderQuantity.ShippingCarrier = order.Split('?')[3].Trim();                             
+                                orderQuantity.ShippingCarrier = order.Split('?')[3].Trim();
                                 orderQuantity.AmazonLabel = string.IsNullOrEmpty(order.Split('?')[4].Trim()) ? false : true;
                                 orderQuantity.EasyPostLabel = string.IsNullOrEmpty(order.Split('?')[5].Trim()) ? false : true;
                                 orderQuantity.SiteName = order.Split('?')[6].Trim();
@@ -119,7 +121,7 @@ namespace AbsoluteApp.Controllers
                                 orderQuantity.DistributionCenterCode = order.Split('?')[8].Trim();
                                 orderQuantity.IsHold = order.Split('?')[9].Trim();
                                 orderQuantities.Add(orderQuantity);
-                                    //pickList1.OrderQuantity = row["OrdersQuantity"].ToString();
+                                //pickList1.OrderQuantity = row["OrdersQuantity"].ToString();
                             }
                             pickList1.AmazonLabelPrinted = string.IsNullOrEmpty(row["ShipmentID"].ToString()) ? false : true;
                             pickList1.EasyPostLabelPrinted = string.IsNullOrEmpty(row["labelUrl"].ToString()) ? false : true;
@@ -166,60 +168,8 @@ namespace AbsoluteApp.Controllers
                 response.Content = new StringContent(JObject.Parse(Newtonsoft.Json.JsonConvert.SerializeObject(failedresponse)).ToString(), Encoding.UTF8, "application/json");
                 return response;
             }
-
         }
-    }
 
-    #region RESPONSE CLASSES
-
-    public class GetPicklistByBatchIdsucessresponse
-    {
-        public IList<PickList> Sku { get; set; }
-        public string ShippingCarrierForSingleSku { get; set; }
-        public string ShippingClassForSingleSku { get; set; }
-        public string OrderForSingleSku { get; set; }
+       
     }
-    public class PickList
-    {
-        public int Id { get; set; }
-        public string OrderNumber { get; set; }
-        public string SiteOrderId { get; set; }
-        public string sku { get; set; }
-        public string title { get; set; }
-        public string WarehouseLocation { get; set; }
-        public string ean { get; set; }
-        public string url { get; set; }
-        public string QtyToPick { get; set; }
-        public string ShippingCarrierForMSMQW { get; set; }
-        public string ShippingClassForMSMQW { get; set; }
-        public IList<OrderQuantity> OrderQuantity { get; set; }
-        public bool AmazonLabelPrinted { get; set; }
-        public bool EasyPostLabelPrinted { get; set; }
-        public string SiteName { get; set; }
-        public string DistributionCenterCode { get; set; }
-        public string AttEAN { get; set; }
-        public string IsHold { get; set; }
-
-    }
-
-    public class OrderQuantity
-    {
-        public int OrderNumber { get; set; }
-        public int Quanity { get; set; }
-        public string ShippingClass { get; set; }
-        public string ShippingCarrier { get; set; }
-        public bool AmazonLabel { get; set; }
-        public bool EasyPostLabel { get; set; }
-        public string SiteName { get; set; }
-        public string SiteOrderId { get; set; }
-        public string DistributionCenterCode { get; set; }
-        public string IsHold { get; set; }
-
-    }
-    public class GetPicklistByBatchIdfailedresponse
-    {
-        public string message { get; set; }
-        public int code { get; set; }
-    }
-    #endregion
 }

@@ -86,7 +86,7 @@ namespace AbsoluteApp.Controllers
 
                 IList<Batches> listBatch = new List<Batches>();
                 int i = 1;
-
+                int jj = 1;
                 //added on  16 August 2023
                 int pre = 1;
                 int shop = 1;
@@ -127,6 +127,8 @@ namespace AbsoluteApp.Controllers
                         batches.TotalDCs = r["TotalDCs"].ToString();
                         batches.TotalShippingClasses = r["TotalShippingClass"].ToString();
                         batches.HoldCount = r["HoldCount"].ToString();
+                        batches.NewTotalOrders = r["NewTotalOrders"].ToString();
+                        batches.NewUnShippedOrders = r["NewPickedOrders"].ToString();
                         //if (Convert.ToInt32(r["PickedSKUs"].ToString()) == Convert.ToInt32(r["TotalSKUs"].ToString()))
                         //{
                         //    batches.status = "Complete";

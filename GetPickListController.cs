@@ -205,6 +205,8 @@ namespace AbsoluteApp
         public string TotalDCs { get; set; }
         public string TotalShippingClasses { get; set; }
         public string HoldCount { get; set; }
+        public string NewTotalOrders { get; set; }
+        public string NewUnShippedOrders { get; set; }
     }
     public class Skus
     {
