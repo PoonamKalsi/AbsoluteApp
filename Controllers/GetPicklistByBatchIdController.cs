@@ -14,7 +14,7 @@ namespace AbsoluteApp.Controllers
 {
     public class GetPicklistByBatchIdController : ApiController
     {
-        public HttpResponseMessage Get(HttpRequestMessage request, string BatchId, string ShowPickedOrders = "false")
+        public HttpResponseMessage Get(HttpRequestMessage request, string BatchId, string ShowPickedOrders = "false", string showhold="false")
         {
             try
             {
@@ -32,19 +32,40 @@ namespace AbsoluteApp.Controllers
 
                 SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnJadlam"].ToString());
                 DataTable dt = new DataTable();
-                using (SqlConnection con = connection)
+                if (showhold == "false")
                 {
-                    using (SqlCommand cmd = new SqlCommand("GetPickListByBatchId", con))
+                    using (SqlConnection con = connection)
                     {
-                        if (con.State == System.Data.ConnectionState.Closed)
-                            con.Open();
-                        cmd.Parameters.AddWithValue("@Batch", BatchId);
-                        cmd.Parameters.AddWithValue("@ShowPickedOrders", ShowPickedOrders);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = 90;
-                        SqlDataAdapter adp = new SqlDataAdapter(cmd);
-                        adp.Fill(dt);
-                        con.Close();
+                        using (SqlCommand cmd = new SqlCommand("GetPickListByBatchId", con))
+                        {
+                            if (con.State == System.Data.ConnectionState.Closed)
+                                con.Open();
+                            cmd.Parameters.AddWithValue("@Batch", BatchId);
+                            cmd.Parameters.AddWithValue("@ShowPickedOrders", ShowPickedOrders);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandTimeout = 90;
+                            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                            adp.Fill(dt);
+                            con.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    using (SqlConnection con = connection)
+                    {
+                        using (SqlCommand cmd = new SqlCommand("GetPickListByBatchIdForHold", con))
+                        {
+                            if (con.State == System.Data.ConnectionState.Closed)
+                                con.Open();
+                            cmd.Parameters.AddWithValue("@Batch", BatchId);
+                            cmd.Parameters.AddWithValue("@ShowPickedOrders", ShowPickedOrders);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandTimeout = 90;
+                            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                            adp.Fill(dt);
+                            con.Close();
+                        }
                     }
                 }
                 #endregion
@@ -214,6 +235,8 @@ namespace AbsoluteApp.Controllers
         public string SiteOrderId { get; set; }
         public string DistributionCenterCode { get; set; }
         public string IsHold { get; set; }
+        public string ShippingStatus { get; set; }
+        public string IsPicked { get; set; }
 
     }
     public class GetPicklistByBatchIdfailedresponse

@@ -1,21 +1,22 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
+using System.Data.SqlClient;
+using System.Configuration;
+
 
 namespace AbsoluteApp.Controllers
 {
-    public class GetUnshippedOrdersByBatchIdController : ApiController
+    public class GetPicklistByBatchIdPaginationController : ApiController
     {
         // GET api/<controller>
-        public HttpResponseMessage Get(HttpRequestMessage request, string BatchId, int size, int skip)
+        public HttpResponseMessage Get(HttpRequestMessage request, string BatchId, string ShowPickedOrders = "false", string showhold = "false" , int size=0, int skip=0)
         {
             try
             {
@@ -33,20 +34,44 @@ namespace AbsoluteApp.Controllers
 
                 SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnJadlam"].ToString());
                 DataTable dt = new DataTable();
-                using (SqlConnection con = connection)
+                if (showhold == "false")
                 {
-                    using (SqlCommand cmd = new SqlCommand("GetUnshippedPickListByBatchId", con))
+                    using (SqlConnection con = connection)
                     {
-                        if (con.State == System.Data.ConnectionState.Closed)
-                            con.Open();
-                        cmd.Parameters.AddWithValue("@Batch", BatchId);
-                        cmd.Parameters.AddWithValue("@size", size);
-                        cmd.Parameters.AddWithValue("@skip", skip);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = 90;
-                        SqlDataAdapter adp = new SqlDataAdapter(cmd);
-                        adp.Fill(dt);
-                        con.Close();
+                        using (SqlCommand cmd = new SqlCommand("GetPickListByBatchIdPaginationlive", con))
+                        {
+                            if (con.State == System.Data.ConnectionState.Closed)
+                                con.Open();
+                            cmd.Parameters.AddWithValue("@Batch", BatchId);
+                            cmd.Parameters.AddWithValue("@ShowPickedOrders", ShowPickedOrders);
+                            cmd.Parameters.AddWithValue("@size", size);
+                            cmd.Parameters.AddWithValue("@skip", skip);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandTimeout = 90;
+                            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                            adp.Fill(dt);
+                            con.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    using (SqlConnection con = connection)
+                    {
+                        using (SqlCommand cmd = new SqlCommand("GetPickListByBatchIdForHoldPaginationLive", con))
+                        {
+                            if (con.State == System.Data.ConnectionState.Closed)
+                                con.Open();
+                            cmd.Parameters.AddWithValue("@Batch", BatchId);
+                            cmd.Parameters.AddWithValue("@ShowPickedOrders", ShowPickedOrders);
+                            cmd.Parameters.AddWithValue("@size", size);
+                            cmd.Parameters.AddWithValue("@skip", skip);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandTimeout = 90;
+                            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                            adp.Fill(dt);
+                            con.Close();
+                        }
                     }
                 }
                 #endregion
@@ -172,6 +197,6 @@ namespace AbsoluteApp.Controllers
             }
         }
 
-       
+     
     }
 }

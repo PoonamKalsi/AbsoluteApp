@@ -70,7 +70,7 @@ namespace AbsoluteApp.Controllers
 
                 //using (SqlCommand cmd = new SqlCommand("select 'PickList-'+Cast((ROW_NUMBER() OVER(ORDER BY Id)) as nvarchar(100)) [Picklist], BatchId,CreatedOn,[Request Type],[Status] , (select count(*) from ( (SELECT t.sku,r.MaxTime FROM ( SELECT SKU, count(*) as MaxTime FROM PicklistOrdersForApp where IsShippedOnCA='true' and BatchId=jd.BatchId GROUP BY SKU ) r INNER JOIN PicklistOrdersForApp t ON t.sku = r.sku group by t.sku,r.MaxTime having count(*)>= r.MaxTime)) as [Picked SKU])[Picked SKU], (select count(*) from ( (SELECT t.[Order Number],r.MaxTime FROM ( SELECT [Order Number], count(*) as MaxTime FROM PicklistOrdersForApp where IsShippedOnCA='true' and BatchId=jd.BatchId GROUP BY [Order Number] ) r INNER JOIN PicklistOrdersForApp t ON t.[Order Number] = r.[Order Number] group by t.[Order Number],r.MaxTime having count(*)<= r.MaxTime)) as [Picked Orders])[Picked Orders], (select count(*) from ((select distinct pic.SKU from PicklistOrdersForApp pic left join [Absolute].dbo.JADLAM_EAN_SKU_MAPPING ean on ean.SKU=pic.SKU left join [Absolute].dbo.JADLAM_IMAGE_SKU_MAPPING img on img.ProductId=ean.Id where pic.BatchId=jd.BatchId and pic.SKU not like '%fba%' and pic.[Order Number] not in (select Distinct [Order Number]from JadlamOrdersForApp jdo left join [Absolute].dbo.JADLAM_EAN_SKU_MAPPING map on jdo.SKU=map.Sku where ([Warehouse Location] like '%hc%' or [Warehouse Location] like '%gm%') and [Payment Status]='Cleared' and [Refund Status]='NoRefunds' and [Shipping Status]='PendingShipment' and jdo.SKU not like '%fba%' and [Site Name]!='Shopify POS' and IsShippedOnCA='False') group by pic.SKU,ean.Title,ean.WarehouseLocation,ean.EAN,img.[Url] )) as [Total SKUs]) [Total SKUs] , (select count(*) from ((select distinct pic.[Order Number] from PicklistOrdersForApp pic left join [Absolute].dbo.JADLAM_EAN_SKU_MAPPING ean on ean.SKU=pic.SKU left join [Absolute].dbo.JADLAM_IMAGE_SKU_MAPPING img on img.ProductId=ean.Id where pic.BatchId=jd.BatchId and pic.SKU not like '%fba%' and [Shipping Status]<>'Shipped' and pic.[Order Number] not in (select Distinct [Order Number]from JadlamOrdersForApp jdo left join [Absolute].dbo.JADLAM_EAN_SKU_MAPPING map on jdo.SKU=map.Sku where ([Warehouse Location] like '%hc%' or [Warehouse Location] like '%gm%') and [Payment Status]='Cleared' and [Refund Status]='NoRefunds' and [Shipping Status]='PendingShipment' and jdo.SKU not like '%fba%' and [Site Name]!='Shopify POS' and IsShippedOnCA='False') group by pic.SKU,ean.Title,ean.WarehouseLocation,ean.EAN,img.[Url],[Order Number] )) as [Total Orders]) [Total Orders] from JadlamPickList jd where  CreatedOn>=DATEADD(DAY,-5,GETDATE()) and   Status <> 'Failed' order by Id desc", con))
                 //using (SqlCommand cmd = new SqlCommand("select * from JadlamPickList where Status = 'Processed'  order by Id desc", con))
-                using (SqlCommand cmd = new SqlCommand("select *, (select  count(distinct [Warehouse Location]) from PicklistOrdersForApp where BatchId=jp.BatchId and [Shipping Status]<>'Shipped') [TotalLocations],(select  count(distinct DistributionCenterCode) from PicklistOrdersForApp where BatchId=jp.BatchId and [Shipping Status]<>'Shipped') [TotalDCs],(select  count(distinct ShippingClass) from PicklistOrdersForApp where BatchId=jp.BatchId and [Shipping Status]<>'Shipped') [TotalShippingClass],  (select  count(distinct SKU) from PicklistOrdersForApp where BatchId=jp.BatchId and [Shipping Status]<>'Shipped' and IsHold='true') [HoldCount]  from JadlamPickList jp WITH (NOLOCK) where Status = 'Processed'  order by Id desc", con))
+                using (SqlCommand cmd = new SqlCommand("select *, (select  count(distinct [Warehouse Location]) from PicklistOrdersForApp where BatchId=jp.BatchId and [Shipping Status]<>'Shipped' and ( IsHold='false' or IsHold is null) and IsShippedOnCA='false') [TotalLocations],(select  count(distinct DistributionCenterCode) from PicklistOrdersForApp where BatchId=jp.BatchId and [Shipping Status]<>'Shipped' and ( IsHold='false' or IsHold is null) and IsShippedOnCA='false') [TotalDCs],(select  count(distinct ShippingClass) from PicklistOrdersForApp where BatchId=jp.BatchId and [Shipping Status]<>'Shipped' and ( IsHold='false' or IsHold is null) and IsShippedOnCA='false') [TotalShippingClass],  (select  count(distinct SKU) from PicklistOrdersForApp where BatchId=jp.BatchId and [Shipping Status]<>'Shipped' and IsHold='true' and IsShippedOnCA='false') [HoldCount]  from JadlamPickList jp WITH (NOLOCK) where Status = 'Processed'  order by Id desc", con))
                 {
                     if (con.State == ConnectionState.Open)
                         con.Close();
@@ -97,19 +97,20 @@ namespace AbsoluteApp.Controllers
                     if (r["PickListStatus"].ToString() != "No EAN found!")
                     {
                         Batches batches = new Batches();
-                        batches.Picklist = "Picklist-" + i.ToString();
+                        //batches.Picklist = "Picklist-" + i.ToString();
+                        batches.Picklist = r["PicklistId"].ToString();
 
-                        var loc = r["BatchId"].ToString().Split('/');
-                        if (loc.Length > 1)
-                        {
-                            batches.Picklist = "Picklist-" + i.ToString();
-                            //for (int jj = 1; jj < loc.Length; jj++)
-                            //{
-                            //    batches.Picklist = batches.Picklist+loc[jj];
-                            //}
+                        //var loc = r["BatchId"].ToString().Split('/');
+                        //if (loc.Length > 1)
+                        //{
+                        //    batches.Picklist = "Picklist-" + i.ToString();
+                        //    //for (int jj = 1; jj < loc.Length; jj++)
+                        //    //{
+                        //    //    batches.Picklist = batches.Picklist+loc[jj];
+                        //    //}
 
-                            batches.Picklist = batches.Picklist +"-"+ r["BatchId"].ToString().Replace(loc[0] + "/", "");
-                        }
+                        //    batches.Picklist = batches.Picklist +"-"+ r["BatchId"].ToString().Replace(loc[0] + "/", "");
+                        //}
 
                         batches.BatchId = r["BatchId"].ToString();
                         batches.CreatedOn = r["CreatedOn"].ToString();
@@ -151,31 +152,31 @@ namespace AbsoluteApp.Controllers
 
 
                         //added on  16 August 2023
-                        if (loc.Length == 1 && !batches.BatchId.StartsWith("Pre") && !batches.BatchId.StartsWith("Shop"))
-                        {
-                            i = i + 1;
-                        }
+                        //if (loc.Length == 1 && !batches.BatchId.StartsWith("Pre") && !batches.BatchId.StartsWith("Shop"))
+                        //{
+                        //    i = i + 1;
+                        //}
 
-                        if (loc.Length == 1 && batches.BatchId.StartsWith("Pre"))
-                        {
-                            pre = pre + 1;
-                        }
+                        //if (loc.Length == 1 && batches.BatchId.StartsWith("Pre"))
+                        //{
+                        //    pre = pre + 1;
+                        //}
 
-                        if (loc.Length == 1 && batches.BatchId.StartsWith("Shop"))
-                        {
-                            shop = shop + 1;
-                        }
+                        //if (loc.Length == 1 && batches.BatchId.StartsWith("Shop"))
+                        //{
+                        //    shop = shop + 1;
+                        //}
                         //added on  16 August 2023
                         listBatch.Add(batches);
                     }
                     else
                     {
                         Batches batches = new Batches();
-                        var ifany = from myRow in dt.AsEnumerable() where myRow.Field<string>("BatchId").StartsWith(r["BatchId"].ToString()) && myRow.Field<string>("status") != "No EAN found!" select myRow;
-                        if (ifany.ToList().Count() > 1)
-                        {
-                            batches.Picklist = "Picklist-" + i.ToString();
-                        }
+                        //var ifany = from myRow in dt.AsEnumerable() where myRow.Field<string>("BatchId").StartsWith(r["BatchId"].ToString()) && myRow.Field<string>("status") != "No EAN found!" select myRow;
+                        //if (ifany.ToList().Count() > 1)
+                        //{
+                        //    batches.Picklist = "Picklist-" + i.ToString();
+                        //}
                         batches.BatchId = r["BatchId"].ToString();
                         batches.CreatedOn = r["CreatedOn"].ToString();
                         batches.Request_Type = r["Request Type"].ToString();
@@ -200,179 +201,179 @@ namespace AbsoluteApp.Controllers
                         //}
                         ////commented on  16 August 2023
 
-                        //added on  16 August 2023
-                        if (ifany.ToList().Count() > 1 && !batches.BatchId.StartsWith("Pre") && !batches.BatchId.StartsWith("Shop"))
-                        {
-                            i = i + 1;
-                        }
+                        ////added on  16 August 2023
+                        //if (ifany.ToList().Count() > 1 && !batches.BatchId.StartsWith("Pre") && !batches.BatchId.StartsWith("Shop"))
+                        //{
+                        //    i = i + 1;
+                        //}
 
-                        if (ifany.ToList().Count() > 1 && batches.BatchId.StartsWith("Pre"))
-                        {
-                            pre = pre + 1;
-                        }
+                        //if (ifany.ToList().Count() > 1 && batches.BatchId.StartsWith("Pre"))
+                        //{
+                        //    pre = pre + 1;
+                        //}
 
-                        if (ifany.ToList().Count() > 1 && batches.BatchId.StartsWith("Shop"))
-                        {
-                            shop = shop + 1;
-                        }
+                        //if (ifany.ToList().Count() > 1 && batches.BatchId.StartsWith("Shop"))
+                        //{
+                        //    shop = shop + 1;
+                        //}
                         //added on  16 August 2023
 
                         listBatch.Add(batches);
                     }
                 }
-                i = i - 1;
-                //added on  16 August 2023
-                pre = pre - 1;
-                shop = shop - 1;
-                //added on  16 August 2023
+                //i = i - 1;
+                ////added on  16 August 2023
+                //pre = pre - 1;
+                //shop = shop - 1;
+                ////added on  16 August 2023
 
-                foreach (var r in listBatch)
-                {
-                    //var ifany = from myRow in dt.AsEnumerable() where myRow.Field<string>("BatchId") == r.BatchId.ToString() select myRow;
-                    //var ifany = from myRow in dt.AsEnumerable() where myRow.Field<string>("BatchId") == r.BatchId.ToString() select myRow;
+                //foreach (var r in listBatch)
+                //{
+                //    //var ifany = from myRow in dt.AsEnumerable() where myRow.Field<string>("BatchId") == r.BatchId.ToString() select myRow;
+                //    //var ifany = from myRow in dt.AsEnumerable() where myRow.Field<string>("BatchId") == r.BatchId.ToString() select myRow;
 
-                    //if (ifany.ToList().Count() > 1)
-                    //{
-                    //    r.Picklist = "Picklist-" + i.ToString();
-                    //    i = i - 1;
-                    //}
-                    if (r.status != "No EAN found!")
-                    {
-                        //var loc = r.BatchId.ToString().Split('/');
+                //    //if (ifany.ToList().Count() > 1)
+                //    //{
+                //    //    r.Picklist = "Picklist-" + i.ToString();
+                //    //    i = i - 1;
+                //    //}
+                //    if (r.status != "No EAN found!")
+                //    {
+                //        //var loc = r.BatchId.ToString().Split('/');
 
-                        //if (loc.Length > 1)
-                        //{
-                        //    var PicklistId = listBatch.Where(x => x.BatchId == loc[0]).Select(x => x.Picklist).FirstOrDefault().ToString();
-                        //    //r.Picklist = PicklistId + "-" + loc[1];
-                        //    for (int jj = 1; jj <= loc.Length; jj++)
-                        //    {
-                        //        r.Picklist = loc[jj];
-                        //    }
-                        //}
-                        var loc = r.BatchId.ToString().Split('/');
+                //        //if (loc.Length > 1)
+                //        //{
+                //        //    var PicklistId = listBatch.Where(x => x.BatchId == loc[0]).Select(x => x.Picklist).FirstOrDefault().ToString();
+                //        //    //r.Picklist = PicklistId + "-" + loc[1];
+                //        //    for (int jj = 1; jj <= loc.Length; jj++)
+                //        //    {
+                //        //        r.Picklist = loc[jj];
+                //        //    }
+                //        //}
+                //        var loc = r.BatchId.ToString().Split('/');
 
-                        var PicklistId = listBatch.Where(x => x.BatchId == loc[0]).Select(x => x.Picklist).FirstOrDefault().ToString();
-                        r.Picklist = PicklistId ;
+                //        var PicklistId = listBatch.Where(x => x.BatchId == loc[0]).Select(x => x.Picklist).FirstOrDefault().ToString();
+                //        r.Picklist = PicklistId ;
 
-                        if (loc.Length > 1)
-                        {
-                            r.Picklist = "Picklist-" + i.ToString();
-                            //for (int jj = 1; jj < loc.Length; jj++)
-                            //{
-                            //    r.Picklist = r.Picklist+ loc[jj];
-                            //}
-                            r.Picklist = r.Picklist+ "-" + r.BatchId.ToString().Replace(loc[0] + "/", "");
-                        }
-                        else
-                        {
-                            ////commented on  16 August 2023
-                            //r.Picklist = "Picklist-" + i.ToString();
-                            //i = i - 1;
-                            ////commented on  16 August 2023
+                //        if (loc.Length > 1)
+                //        {
+                //            r.Picklist = "Picklist-" + i.ToString();
+                //            //for (int jj = 1; jj < loc.Length; jj++)
+                //            //{
+                //            //    r.Picklist = r.Picklist+ loc[jj];
+                //            //}
+                //            r.Picklist = r.Picklist+ "-" + r.BatchId.ToString().Replace(loc[0] + "/", "");
+                //        }
+                //        else
+                //        {
+                //            ////commented on  16 August 2023
+                //            //r.Picklist = "Picklist-" + i.ToString();
+                //            //i = i - 1;
+                //            ////commented on  16 August 2023
 
-                            //added on  16 August 2023
-                            if (r.BatchId.StartsWith("Pre"))
-                            {
-                                r.Picklist = "Picklist-" + pre.ToString();
-                                pre = pre - 1;
-                            }
+                //            //added on  16 August 2023
+                //            if (r.BatchId.StartsWith("Pre"))
+                //            {
+                //                r.Picklist = "Picklist-" + pre.ToString();
+                //                pre = pre - 1;
+                //            }
 
-                            else if (r.BatchId.StartsWith("Shop"))
-                            {
-                                r.Picklist = "Picklist-" + shop.ToString();
-                                shop = shop - 1;
-                            }
-                            else
-                            {
-                                r.Picklist = "Picklist-" + i.ToString();
-                                i = i - 1;
-                            }
-                            //added on  16 August 2023
+                //            else if (r.BatchId.StartsWith("Shop"))
+                //            {
+                //                r.Picklist = "Picklist-" + shop.ToString();
+                //                shop = shop - 1;
+                //            }
+                //            else
+                //            {
+                //                r.Picklist = "Picklist-" + i.ToString();
+                //                i = i - 1;
+                //            }
+                //            //added on  16 August 2023
 
-                        }
+                //        }
 
-                        if (r.BatchId.StartsWith("Pre"))
-                        {
-                            ////commented on  16 August 2023
-                            //r.Picklist = r.Picklist + "-" + "preorder";
-                            ////commented on  16 August 2023
+                //        if (r.BatchId.StartsWith("Pre"))
+                //        {
+                //            ////commented on  16 August 2023
+                //            //r.Picklist = r.Picklist + "-" + "preorder";
+                //            ////commented on  16 August 2023
 
 
-                            //added on  16 August 2023
-                            r.Picklist = "Preorder" + "-" + r.Picklist;
-                            //added on  16 August 2023
+                //            //added on  16 August 2023
+                //            r.Picklist = "Preorder" + "-" + r.Picklist;
+                //            //added on  16 August 2023
 
-                        }
+                //        }
 
-                        if (r.BatchId.StartsWith("Shop"))
-                        {
-                            r.Picklist = "Shop-" + r.Picklist;
-                        }
-                    }
-                    else
-                    {
-                        var ifany = from myRow in dt.AsEnumerable() where myRow.Field<string>("BatchId").StartsWith(r.BatchId.ToString()) && myRow.Field<string>("status") != "No EAN found!" select myRow;
-                        if (ifany.ToList().Count() > 1)
-                        {
-                            ////commented on  16 August 2023
-                            //r.Picklist = "Picklist-" + i.ToString();
-                            //i = i - 1;
-                            ////commented on  16 August 2023
+                //        if (r.BatchId.StartsWith("Shop"))
+                //        {
+                //            r.Picklist = "Shop-" + r.Picklist;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        var ifany = from myRow in dt.AsEnumerable() where myRow.Field<string>("BatchId").StartsWith(r.BatchId.ToString()) && myRow.Field<string>("status") != "No EAN found!" select myRow;
+                //        if (ifany.ToList().Count() > 1)
+                //        {
+                //            ////commented on  16 August 2023
+                //            //r.Picklist = "Picklist-" + i.ToString();
+                //            //i = i - 1;
+                //            ////commented on  16 August 2023
 
-                            //added on  16 August 2023
-                            if (r.BatchId.StartsWith("Pre"))
-                            {
-                                r.Picklist = "Picklist-" + pre.ToString();
-                                pre = pre - 1;
-                            }
+                //            //added on  16 August 2023
+                //            if (r.BatchId.StartsWith("Pre"))
+                //            {
+                //                r.Picklist = "Picklist-" + pre.ToString();
+                //                pre = pre - 1;
+                //            }
 
-                            else if (r.BatchId.StartsWith("Shop"))
-                            {
-                                r.Picklist = "Picklist-" + shop.ToString();
-                                shop = shop - 1;
-                            }
-                            else
-                            {
-                                r.Picklist = "Picklist-" + i.ToString();
-                                i = i - 1;
-                            }
-                            //added on  16 August 2023
-                        }
-                    }
-                }
+                //            else if (r.BatchId.StartsWith("Shop"))
+                //            {
+                //                r.Picklist = "Picklist-" + shop.ToString();
+                //                shop = shop - 1;
+                //            }
+                //            else
+                //            {
+                //                r.Picklist = "Picklist-" + i.ToString();
+                //                i = i - 1;
+                //            }
+                //            //added on  16 August 2023
+                //        }
+                //    }
+                //}
 
-                foreach (var r in listBatch)
-                {
-                    if (r.status != "No EAN found!")
-                    {
-                        //var loc = r.BatchId.ToString().Split('/');
-                        //if (loc.Length > 1)
-                        //{
-                        //    var PicklistId = listBatch.Where(x => x.BatchId == loc[0]).Select(x => x.Picklist).FirstOrDefault().ToString();
-                        //    r.Picklist = PicklistId + "-" + loc[1];
-                        //}
-                        var loc = r.BatchId.ToString().Split('/');
+                //foreach (var r in listBatch)
+                //{
+                //    if (r.status != "No EAN found!")
+                //    {
+                //        //var loc = r.BatchId.ToString().Split('/');
+                //        //if (loc.Length > 1)
+                //        //{
+                //        //    var PicklistId = listBatch.Where(x => x.BatchId == loc[0]).Select(x => x.Picklist).FirstOrDefault().ToString();
+                //        //    r.Picklist = PicklistId + "-" + loc[1];
+                //        //}
+                //        var loc = r.BatchId.ToString().Split('/');
 
-                        var PicklistId = listBatch.Where(x => x.BatchId == loc[0]).Select(x => x.Picklist).FirstOrDefault().ToString();
-                        r.Picklist = PicklistId;
+                //        var PicklistId = listBatch.Where(x => x.BatchId == loc[0]).Select(x => x.Picklist).FirstOrDefault().ToString();
+                //        r.Picklist = PicklistId;
 
-                        if (loc.Length > 1)
-                        {
-                            //r.Picklist = "Picklist-" + i.ToString();
-                            //for (int jj = 1; jj < loc.Length; jj++)
-                            //{
-                            //    r.Picklist = r.Picklist + loc[jj];
-                            //}
-                            r.Picklist = r.Picklist +"-"+ r.BatchId.ToString().Replace(loc[0]+"/", "");
+                //        if (loc.Length > 1)
+                //        {
+                //            //r.Picklist = "Picklist-" + i.ToString();
+                //            //for (int jj = 1; jj < loc.Length; jj++)
+                //            //{
+                //            //    r.Picklist = r.Picklist + loc[jj];
+                //            //}
+                //            r.Picklist = r.Picklist +"-"+ r.BatchId.ToString().Replace(loc[0]+"/", "");
 
-                        }
+                //        }
 
-                    }
-                    if (r.status == "No EAN found!")
-                    {
-                        r.Picklist = null;
-                    }
-                }
+                //    }
+                //    if (r.status == "No EAN found!")
+                //    {
+                //        r.Picklist = null;
+                //    }
+                //}
                 sucessresponse.Batch = listBatch;
                 var response1 = Request.CreateResponse(HttpStatusCode.OK);
                 response1.Headers.Add("Access-Control-Allow-Origin", "*");

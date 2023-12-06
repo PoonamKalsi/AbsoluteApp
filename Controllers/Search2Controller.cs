@@ -72,6 +72,22 @@ namespace AbsoluteApp.Controllers
                         adapter.Fill(dt);
                     }
                 }
+                //added for justkeeper
+                if (AccountType == "Justkeeper")
+                {
+                    con.ConnectionString = ConfigurationManager.AppSettings["DBConnjustkeep"].ToString();
+
+                    using (SqlCommand cmd = new SqlCommand("select ID,EAN,Sku,Title,WarehouseLocation,Url from JUSTKEEPERS_EAN_SKU_MAPPING sk left join  JUSTKEEPERS_IMAGE_SKU_MAPPING im on sk.ID = im.ProductID where EAN='" + EAN + "'", con))
+                    {
+                        if (con.State == ConnectionState.Closed)
+                            con.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        //fill the dataset
+                        adapter.Fill(dt);
+                    }
+                }
+                //added for justkeeper
+
                 if (dt == null || dt.Rows.Count == 0)
                 {
                     failedresponse1 failedresponse = new failedresponse1();
@@ -185,6 +201,24 @@ namespace AbsoluteApp.Controllers
                         adapter.Fill(dt);
                     }
                 }
+                //added for justkeeper
+                if (AccountType == "Justkeeper")
+                {
+                    if (con.State == ConnectionState.Open)
+                        con.Close();
+
+                    con.ConnectionString = ConfigurationManager.AppSettings["DBConnjustkeep"].ToString();
+
+                    using (SqlCommand cmd = new SqlCommand("select ID,EAN,Sku,Title,WarehouseLocation,Url from JUSTKEEPERS_EAN_SKU_MAPPING sk left join  JUSTKEEPERS_IMAGE_SKU_MAPPING im on sk.ID = im.ProductID where Id='" + Id + "'", con))
+                    {
+                        if (con.State == ConnectionState.Closed)
+                            con.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        //fill the dataset
+                        adapter.Fill(dt);
+                    }
+                }
+                //added for justkeeper
                 if (dt == null || dt.Rows.Count == 0)
                 {
                     failedresponse1 failedresponse = new failedresponse1();
@@ -215,6 +249,22 @@ namespace AbsoluteApp.Controllers
                             cmd.ExecuteNonQuery();
                         }
                     }
+                    //added for justkeeper
+                    if (AccountType == "Justkeeper")
+                    {
+                        if (con.State == ConnectionState.Open)
+                            con.Close();
+
+                        con.ConnectionString = ConfigurationManager.AppSettings["DBConnjustkeep"].ToString();
+
+                        using (SqlCommand cmd = new SqlCommand("Update JUSTKEEPERS_EAN_SKU_MAPPING set WarehouseLocation='" + Location + "' where Id='" + Id + "'", con))
+                        {
+                            if (con.State == ConnectionState.Closed)
+                                con.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    //added for justkeeper
                 }
 
                 DataTable dt1 = new DataTable();
@@ -240,6 +290,24 @@ namespace AbsoluteApp.Controllers
                         adapter.Fill(dt1);
                     }
                 }
+                //added for justkeeper
+                if (AccountType == "Justkeeper")
+                {
+                    if (con.State == ConnectionState.Open)
+                        con.Close();
+
+                    con.ConnectionString = ConfigurationManager.AppSettings["DBConnjustkeep"].ToString();
+
+                    using (SqlCommand cmd = new SqlCommand("select ID,EAN,Sku,Title,WarehouseLocation,Url from JUSTKEEPERS_EAN_SKU_MAPPING sk left join  JUSTKEEPERS_IMAGE_SKU_MAPPING im on sk.ID = im.ProductID where Id='" + Id + "'", con))
+                    {
+                        if (con.State == ConnectionState.Closed)
+                            con.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        //fill the dataset
+                        adapter.Fill(dt1);
+                    }
+                }
+                //added for justkeeper
                 //sucessresponse.success = "true";
                 IList<Result1> rs = new List<Result1>();
                 foreach (DataRow r in dt1.Rows)

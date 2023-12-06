@@ -1172,6 +1172,8 @@
     <Compile Include="Controllers\GetPickedOrdersController.cs" />
     <Compile Include="Controllers\GetPickedOrdersVersion2Controller.cs" />
     <Compile Include="Controllers\GetPicklistByBatchIdController.cs" />
+    <Compile Include="Controllers\GetPicklistByBatchIdPaginationController.cs" />
+    <Compile Include="Controllers\GetPicklistDataController.cs" />
     <Compile Include="Controllers\GetPickListVersion2Controller.cs" />
     <Compile Include="Controllers\GetPreOrderPickListController.cs" />
     <Compile Include="Controllers\GetPreOrdersfirstController.cs" />
@@ -1181,6 +1183,9 @@
     <Compile Include="Controllers\InsertNewLockController.cs" />
     <Compile Include="Controllers\JadlamLabelController.cs" />
     <Compile Include="Controllers\JadlamOrderController.cs" />
+    <Compile Include="Controllers\JustkeepCreatePicklistController.cs" />
+    <Compile Include="Controllers\JustkeepGetPicklistByBatchIdController.cs" />
+    <Compile Include="Controllers\JustkeepValidatePicklistController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\PicklistController.cs" />
     <Compile Include="Controllers\PickListOrderSearchController.cs" />
@@ -1197,6 +1202,7 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="CreatingPicklistOutOfPreOrdersController.cs" />
     <Compile Include="GetPickListController.cs" />
+    <Compile Include="JustkeeGetPicklistsController.cs" />
     <Compile Include="NotificationMessages\AnyOfferChangedNotification.cs" />
     <Compile Include="NotificationMessages\B2BAnyOfferChangedNotification.cs" />
     <Compile Include="NotificationMessages\BuyBoxEligibleOfferElement.cs" />

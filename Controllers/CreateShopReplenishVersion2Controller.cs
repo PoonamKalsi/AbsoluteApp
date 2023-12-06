@@ -53,13 +53,30 @@ namespace AbsoluteApp.Controllers
                 }
                 if (dt.Rows.Count == 0)
                 {
-                    using (SqlCommand cmd = new SqlCommand("Insert into JadlamPickList (BatchId,[Status],[Request Type],CreatedOn,CreatedByUser) values('" + i + "', 'Processed', 'SIW', GetDate(),'" + UserId + "')", con))
-                    {
-                        if (con.State == ConnectionState.Closed)
-                            con.Open();
+                   
+                        using (SqlCommand cmd = new SqlCommand("CreateShopReplenishPicklist", con))
+                        {
+                            if (con.State == System.Data.ConnectionState.Closed)
+                                con.Open();
+                            cmd.Parameters.AddWithValue("@BatchId", i);
+                            cmd.Parameters.AddWithValue("@RequestType", "SIW");
+                            cmd.Parameters.AddWithValue("@CreatedBy", UserId);
+                            //cmd.Parameters.AddWithValue("@skip", skip);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandTimeout = 90;
+                            cmd.ExecuteNonQuery();
+                            //SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                            //adp.Fill(dt);
+                            con.Close();
+                        }
+                   
+                    //using (SqlCommand cmd = new SqlCommand("Insert into JadlamPickList (BatchId,[Status],[Request Type],CreatedOn,CreatedByUser) values('" + i + "', 'Processed', 'SIW', GetDate(),'" + UserId + "')", con))
+                    //{
+                    //    if (con.State == ConnectionState.Closed)
+                    //        con.Open();
 
-                        cmd.ExecuteNonQuery();
-                    }
+                    //    cmd.ExecuteNonQuery();
+                    //}
 
                     //Getting the SKUs
                     //DataTable SKUs = new DataTable();

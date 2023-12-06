@@ -54,6 +54,7 @@ namespace AbsoluteApp.Controllers
                                 {
                                     if (con.State == ConnectionState.Closed)
                                         con.Open();
+                                    cmd.CommandTimeout = 90;
                                     cmd.ExecuteNonQuery();
                                     con.Close();
                                 }
@@ -67,6 +68,8 @@ namespace AbsoluteApp.Controllers
                                 {
                                     if (con.State == ConnectionState.Closed)
                                         con.Open();
+                                    cmd.CommandTimeout = 90;
+
                                     cmd.ExecuteNonQuery();
                                     con.Close();
                                 }
@@ -87,6 +90,8 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -101,15 +106,19 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
 
                                     //-----------------------------CASE 2----------------------------
-                                    using (SqlCommand cmd = new SqlCommand("Update PicklistOrdersForApp set IsShippedOnCA = 'true' , ValidatedByUser='" + UserId + "', IsHold='false' where BatchId='" + BatchId + "' and [Order Number] in (select pic.[Order Number] from PicklistOrdersForApp pic inner join Absolute.dbo.JADLAM_EAN_SKU_MAPPING jdean on pic.SKU=jdean.Sku where pic.BatchId='" + BatchId + "' and jdean.EAN is not  null  and IsHold is null)", con))
+                                    using (SqlCommand cmd = new SqlCommand("Update PicklistOrdersForApp set IsShippedOnCA = 'true' , ValidatedByUser='" + UserId + "', IsHold='false' where BatchId='" + BatchId + "' and [Order Number] in (select pic.[Order Number] from PicklistOrdersForApp pic inner join Absolute.dbo.JADLAM_EAN_SKU_MAPPING jdean on pic.SKU=jdean.Sku where pic.BatchId='" + BatchId + "' and jdean.EAN is not  null  and (IsHold is null or IsHold='false'))", con))
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -128,6 +137,8 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -142,6 +153,8 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -151,6 +164,8 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -158,24 +173,30 @@ namespace AbsoluteApp.Controllers
                             }
                         }
                         // Updating Picked SKU , Partial Picked SKU and Picked Orders -- there's no such case of partial Order in SIW and SSMQW
-                        using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set PickedSKUs=( select count(*) from ( (SELECT t.sku,r.MaxTime FROM ( SELECT SKU, count(*) as MaxTime FROM PicklistOrdersForApp where IsShippedOnCA='true' and [Shipping Status]<>'Shipped' and BatchId='" + BatchId + "' GROUP BY SKU,[Profile Id] ) r INNER JOIN PicklistOrdersForApp t ON t.sku = r.sku and [Shipping Status]<>'Shipped' and BatchId='" + BatchId + "' group by t.sku,r.MaxTime having count(*)>= r.MaxTime )) as [Picked SKU] ) where BatchId='" + BatchId + "'", con))
+                        using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set PickedSKUs = ( select count(*) from (select SKU from PicklistOrdersForApp where BatchId='"+BatchId+"' and [Shipping Status]<>'Shipped' and IsShippedOnCA='true' and ( IsHold is null or IsHold = 'false') group by SKU,[Profile Id] )t ) where BatchId='"+BatchId+"'", con))
                         {
                             if (con.State == ConnectionState.Closed)
                                 con.Open();
+                            cmd.CommandTimeout = 90;
+
                             cmd.ExecuteNonQuery();
                             con.Close();
                         }
-                        using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set PartialSKUs=(select count(*) from((SELECT t.sku, r.MaxTime FROM(SELECT SKU, count(*) as MaxTime FROM PicklistOrdersForApp where IsShippedOnCA = 'true' and[Shipping Status] <> 'Shipped' and BatchId = '" + BatchId + "' GROUP BY SKU,[Profile Id]) r INNER JOIN PicklistOrdersForApp t ON t.sku = r.sku and IsShippedOnCA = 'false' and[Shipping Status] <> 'Shipped' and BatchId='" + BatchId + "' group by t.sku, r.MaxTime)) as [Picked SKU]) where BatchId = '" + BatchId + "'", con))
+                        using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set PartialSKUs=(select count(*) from((SELECT t.sku, r.MaxTime FROM(SELECT SKU, count(*) as MaxTime FROM PicklistOrdersForApp where IsShippedOnCA = 'true' and ( IsHold='false' or IsHold is null) and[Shipping Status] <> 'Shipped' and ( IsHold is null or IsHold<>'true' or IsHold = 'false') and BatchId = '" + BatchId + "' GROUP BY SKU,[Profile Id]) r INNER JOIN PicklistOrdersForApp t ON t.sku = r.sku and IsShippedOnCA = 'false' and[Shipping Status] <> 'Shipped'  and ( IsHold is null or IsHold<>'true' or IsHold = 'false')  and BatchId='" + BatchId + "' group by t.sku, r.MaxTime)) as [Picked SKU]) where BatchId = '" + BatchId + "'", con))
                         {
                             if (con.State == ConnectionState.Closed)
                                 con.Open();
+                            cmd.CommandTimeout = 90;
+
                             cmd.ExecuteNonQuery();
                             con.Close();
                         }
-                        using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set PickedOrders= ( select top 1 COUNT(*) OVER () AS TotalRecords from PicklistOrdersForApp pic where BatchId ='" + BatchId + "' and IsShippedOnCA='true' and [Shipping Status]<>'Shipped' group by [Order Number]) where BatchId ='" + BatchId + "'", con))
+                        using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set PickedOrders= ( select top 1 COUNT(*) OVER () AS TotalRecords from PicklistOrdersForApp pic where BatchId ='" + BatchId + "' and IsShippedOnCA='true' and ( IsHold='false' or IsHold is null) and [Shipping Status]<>'Shipped' group by [Order Number]) where BatchId ='" + BatchId + "'", con))
                         {
                             if (con.State == ConnectionState.Closed)
                                 con.Open();
+                            cmd.CommandTimeout = 90;
+
                             cmd.ExecuteNonQuery();
                             con.Close();
                         }
@@ -202,6 +223,8 @@ namespace AbsoluteApp.Controllers
                                 {
                                     if (con.State == ConnectionState.Closed)
                                         con.Open();
+                                    cmd.CommandTimeout = 90;
+
                                     cmd.ExecuteNonQuery();
                                     con.Close();
                                 }
@@ -215,6 +238,8 @@ namespace AbsoluteApp.Controllers
                                 {
                                     if (con.State == ConnectionState.Closed)
                                         con.Open();
+                                    cmd.CommandTimeout = 90;
+
                                     cmd.ExecuteNonQuery();
                                     con.Close();
                                 }
@@ -236,6 +261,8 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -250,6 +277,8 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -258,6 +287,8 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -275,6 +306,8 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -289,6 +322,8 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -297,6 +332,8 @@ namespace AbsoluteApp.Controllers
                                     {
                                         if (con.State == ConnectionState.Closed)
                                             con.Open();
+                                        cmd.CommandTimeout = 90;
+
                                         cmd.ExecuteNonQuery();
                                         con.Close();
                                     }
@@ -304,17 +341,21 @@ namespace AbsoluteApp.Controllers
                             }
 
                         }
-                        using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set PickedSKUs=(select count(*) from((SELECT t.sku, r.MaxTime FROM(SELECT SKU, count(*) as MaxTime FROM PicklistOrdersForApp where IsShippedOnCA = 'true' and[Shipping Status] <> 'Shipped' and BatchId = '" + BatchId + "' GROUP BY SKU,[Profile Id]) r INNER JOIN PicklistOrdersForApp t ON t.sku = r.sku group by t.sku, r.MaxTime having count(*) >= r.MaxTime)) as [Picked SKU]) where BatchId ='" + BatchId + "'", con))
+                        using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set PickedSKUs = ( select count(*) from (select SKU from PicklistOrdersForApp where BatchId='"+BatchId+ "' and [Shipping Status]<>'Shipped' and IsShippedOnCA='true' and ( IsHold is null or IsHold = 'false') group by SKU,[Profile Id] )t )where  BatchId='" + BatchId + "'", con))
                         {
                             if (con.State == ConnectionState.Closed)
                                 con.Open();
+                            cmd.CommandTimeout = 90;
+
                             cmd.ExecuteNonQuery();
                             con.Close();
                         }
-                        using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set PartialSKUs=(select count(*) from((SELECT t.sku, r.MaxTime FROM(SELECT SKU, count(*) as MaxTime FROM PicklistOrdersForApp where IsShippedOnCA = 'true' and[Shipping Status] <> 'Shipped' and BatchId = '" + BatchId + "' GROUP BY SKU,[Profile Id]) r INNER JOIN PicklistOrdersForApp t ON t.sku = r.sku and IsShippedOnCA = 'false' and[Shipping Status] <> 'Shipped'  group by t.sku, r.MaxTime)) as [Picked SKU]) where BatchId = '" + BatchId + "'", con))
+                        using (SqlCommand cmd = new SqlCommand("Update JadlamPickList set PartialSKUs=(select count(*) from((SELECT t.sku, r.MaxTime FROM(SELECT SKU, count(*) as MaxTime FROM PicklistOrdersForApp where IsShippedOnCA = 'true'and ( IsHold is null or IsHold<>'true' or IsHold = 'false') and[Shipping Status] <> 'Shipped' and BatchId = '" + BatchId + "' GROUP BY SKU,[Profile Id]) r INNER JOIN PicklistOrdersForApp t ON t.sku = r.sku and IsShippedOnCA = 'false'  and ( IsHold is null or IsHold<>'true' or IsHold = 'false') and[Shipping Status] <> 'Shipped'  group by t.sku, r.MaxTime)) as [Picked SKU]) where BatchId = '" + BatchId + "'", con))
                         {
                             if (con.State == ConnectionState.Closed)
                                 con.Open();
+                            cmd.CommandTimeout = 90;
+
                             cmd.ExecuteNonQuery();
                             con.Close();
                         }
@@ -322,6 +363,8 @@ namespace AbsoluteApp.Controllers
                         {
                             if (con.State == ConnectionState.Closed)
                                 con.Open();
+                            cmd.CommandTimeout = 90;
+
                             cmd.ExecuteNonQuery();
                             con.Close();
                         }
@@ -329,6 +372,8 @@ namespace AbsoluteApp.Controllers
                         {
                             if (con.State == ConnectionState.Closed)
                                 con.Open();
+                            cmd.CommandTimeout = 90;
+
                             cmd.ExecuteNonQuery();
                             con.Close();
                         }
@@ -339,6 +384,8 @@ namespace AbsoluteApp.Controllers
                     {
                         if (con.State == ConnectionState.Closed)
                             con.Open();
+                        cmd.CommandTimeout = 90;
+
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
@@ -348,6 +395,8 @@ namespace AbsoluteApp.Controllers
                     {
                         if (con.State == ConnectionState.Closed)
                             con.Open();
+                        cmd.CommandTimeout = 90;
+
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
@@ -355,6 +404,8 @@ namespace AbsoluteApp.Controllers
                     {
                         if (con.State == ConnectionState.Closed)
                             con.Open();
+                        cmd.CommandTimeout = 90;
+
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
@@ -363,6 +414,8 @@ namespace AbsoluteApp.Controllers
                     {
                         if (con.State == ConnectionState.Closed)
                             con.Open();
+                        cmd.CommandTimeout = 90;
+
                         cmd.ExecuteNonQuery();
                         con.Close();
                     }
@@ -435,6 +488,23 @@ namespace AbsoluteApp.Controllers
 
                     if (!string.IsNullOrEmpty(UserId))
                     {
+
+                        //Killing the processes before starting a new one.
+
+                        string exeName = "JadlamApp_PrivateNotes_ValidationNotes"; // Replace with the actual name of your executable
+
+                        // Get all processes with the specified name
+                        Process[] processes = Process.GetProcessesByName(exeName);
+
+                        // Kill each existing process
+                        foreach (Process process in processes)
+                        {
+                            if (process.Id != Process.GetCurrentProcess().Id)
+                            {
+                                process.Kill();
+                            }
+                        }
+
                         Process p = new Process();
                         p.StartInfo.FileName = @"H:\Applications\Jadlam\Jadlam App - Private Notes Updation\PickListValidatedNotes\JadlamApp_PrivateNotes_ValidationNotes.exe";
                         p.StartInfo.Arguments = "Order:" + (String.IsNullOrEmpty(OrderNumber) ? "" : OrderNumber.Trim()) + " " + "Batch:" + BatchId.Trim().Replace(" ", "**") + " " + "sku:" + (String.IsNullOrEmpty(SKU) ? "" : SKU);

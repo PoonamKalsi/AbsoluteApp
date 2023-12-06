@@ -12,10 +12,10 @@ using System.Web.Http;
 
 namespace AbsoluteApp.Controllers
 {
-    public class GetUnshippedOrdersByBatchIdController : ApiController
+    public class JustkeepGetPicklistByBatchIdController : ApiController
     {
         // GET api/<controller>
-        public HttpResponseMessage Get(HttpRequestMessage request, string BatchId, int size, int skip)
+        public HttpResponseMessage Get(HttpRequestMessage request, string BatchId, string ShowPickedOrders = "false", string showhold = "false", int size = 0, int skip = 0)
         {
             try
             {
@@ -31,22 +31,46 @@ namespace AbsoluteApp.Controllers
                 }
                 #region GETTING DATA FROM PROCEDURE
 
-                SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnJadlam"].ToString());
+                SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnjustkeep"].ToString());
                 DataTable dt = new DataTable();
-                using (SqlConnection con = connection)
+                if (showhold == "false")
                 {
-                    using (SqlCommand cmd = new SqlCommand("GetUnshippedPickListByBatchId", con))
+                    using (SqlConnection con = connection)
                     {
-                        if (con.State == System.Data.ConnectionState.Closed)
-                            con.Open();
-                        cmd.Parameters.AddWithValue("@Batch", BatchId);
-                        cmd.Parameters.AddWithValue("@size", size);
-                        cmd.Parameters.AddWithValue("@skip", skip);
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = 90;
-                        SqlDataAdapter adp = new SqlDataAdapter(cmd);
-                        adp.Fill(dt);
-                        con.Close();
+                        using (SqlCommand cmd = new SqlCommand("GetPickListByBatchId", con))
+                        {
+                            if (con.State == System.Data.ConnectionState.Closed)
+                                con.Open();
+                            cmd.Parameters.AddWithValue("@Batch", BatchId);
+                            cmd.Parameters.AddWithValue("@ShowPickedOrders", ShowPickedOrders);
+                            cmd.Parameters.AddWithValue("@size", size);
+                            cmd.Parameters.AddWithValue("@skip", skip);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandTimeout = 90;
+                            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                            adp.Fill(dt);
+                            con.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    using (SqlConnection con = connection)
+                    {
+                        using (SqlCommand cmd = new SqlCommand("GetPickListByBatchIdForHoldPaginationLive", con))
+                        {
+                            if (con.State == System.Data.ConnectionState.Closed)
+                                con.Open();
+                            cmd.Parameters.AddWithValue("@Batch", BatchId);
+                            cmd.Parameters.AddWithValue("@ShowPickedOrders", ShowPickedOrders);
+                            cmd.Parameters.AddWithValue("@size", size);
+                            cmd.Parameters.AddWithValue("@skip", skip);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandTimeout = 90;
+                            SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                            adp.Fill(dt);
+                            con.Close();
+                        }
                     }
                 }
                 #endregion
